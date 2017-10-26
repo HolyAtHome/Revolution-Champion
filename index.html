@@ -1,0 +1,113 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Revolution Champion</title>
+  <meta name="description" content="A Small 'Game'">
+  <meta name="author" content="Holyoneqt">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="navigation">
+        <a data-bind="click: changeNavigation('Town')">Town</a>
+        <a data-bind="click: changeNavigation('Adventure')">Adventure</a>
+        <a data-bind="click: changeNavigation('Market')">Market</a>
+        <a data-bind="click: changeNavigation('Options')">Options</a>
+    </div>
+    <div class="player-div">
+        <table class="player-table">
+            <tr>
+                <td colspan="2">
+                    <img src="resources/images/Warrior.png" alt="Warrior" height="96" width="96">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" data-bind="text: player.health" style="text-align: center"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <progress class="healthbar" data-bind="attr: { max: player.maxHealth, value: player.currentHealth }"></progress>
+                </td>
+            </tr>
+            <tr>
+                <td>Stamina</td>
+                <td data-bind="text: player.stamina" />
+            </tr>
+            <tr>
+                <td>Strength</td>
+                <td data-bind="text: player.strength" />
+            </tr>
+            <tr>
+                <td>Level</td>
+                <td data-bind="text: player.level" />
+            </tr>
+            <tr>
+                <td colspan="2" data-bind="text: player.exp" style="text-align: center"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <progress class="expbar" data-bind="attr: { max: player.requiredExp, value: player.currentExp }"></progress>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>Gold</td>
+                <td data-bind="text: player.Gold" />
+            </tr> -->
+        </table>
+    </div>
+
+    <div class="main-div adventure-div" data-bind="visible: isNavigation('Adventure')">
+        <div class="navigation adventure-nav">
+            <!-- ko foreach: $Adventures -->
+                <a data-bind="text: $data.name, click: function() { $root.startAdventure($data.name()) }"></a>
+            <!-- /ko -->
+        </div>
+        <div data-bind="with: currentAdventure, visible: currentAdventure">
+            <h1 style="text-align: center" data-bind="text: $data.name"></h1>
+            <button data-bind="click: $data.startFight">Start</button>
+            <div data-bind="visible: $data.isFighting">
+                <button data-bind="click: $data.attack">Attack</button>
+                <table class="monster-table">
+                    <tr>
+                        <td>Name</td>
+                        <td data-bind="text: $data.monster().name" />
+                    </tr>
+                    <tr>
+                        <td colspan="2" data-bind="text: $data.monster().health" style="text-align: center"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <progress class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Stamina</td>
+                        <td data-bind="text: $data.monster().stamina" />
+                    </tr>
+                    <tr>
+                        <td>Strength</td>
+                        <td data-bind="text: $data.monster().strength" />
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td data-bind="text: $data.monster().level" />
+                    </tr>
+                </table>
+            </div>
+            <p data-bind="text: $root.player.level"></p>
+            <p data-bind="text: $data.requiredLevel"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./lib/require.js"></script>
+    <script src="./built/require-config.js"></script>
+    <script>
+        require(["built/core/core"]);
+    </script>
+</body>
+</html>
