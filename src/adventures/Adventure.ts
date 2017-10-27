@@ -43,9 +43,9 @@ export class Adventure {
                 Global.$Navigation('Town');
             }
             if(this.monster().isDead()) {
+                this.player.onMonsterKill(this.monster());
                 this.isFighting(false);
                 this.player.isFighting(false);
-                // TODO: Reward exp
                 this.monster(new Monster(this.monsterLvlMin, this.monsterLvlMax));
             }
         }

@@ -1,6 +1,7 @@
 import { Interval } from './../util/Interval';
 import * as ko from 'knockout';
 import { Entity } from './Entity';
+import { Monster } from './Monster';
 
 export class Player extends Entity {
     
@@ -18,10 +19,40 @@ export class Player extends Entity {
 
         this.currentExp = ko.observable(0);
         this.requiredExp = ko.computed(() => Math.floor(100 * Math.pow(this.level(), 0.75)));
-        this.exp = ko.computed(() => this.currentExp() + '/' + this.requiredExp());
+        this.exp = ko.computed(() => this.checkExp());
 
         this.isFighting = ko.observable(false);
-        new Interval('HP-Reg', () => { this.regenerateHP(this); }, 3000).start();
+        new Interval('HP-Reg', () => { this.regenerateHP(this); }, 500).start();
+    }
+
+    /**
+     * Call when Player kills a Monster.
+     * @param {Monster} monster Monster that was killed.
+     * @memberof Player
+     */
+    public onMonsterKill(monster: Monster): void {
+        this.rewardExp(monster.level());
+    }
+
+    /**
+     * Rewards Experience to the Player based on the Level of the Monster that was slain. 
+     * Formula: 150 / (10 - Monsterlevel-Difference) * Playerlevel
+     * @param {number} monsterLvl Level of the Monster killed.
+     * @memberof Player
+     */
+    private rewardExp(monsterLvl: number): void {
+        let monsterLevelDiff = monsterLvl - this.level();
+        let expReward = 150/(10 - monsterLevelDiff) * this.level();
+        this.currentExp(this.currentExp() + Math.floor(expReward));
+    }
+
+    private checkExp(): String {
+        if(this.currentExp() >= this.requiredExp()) {
+            let expDiff = this.currentExp() - this.requiredExp();
+            this.level(this.level() + 1);
+            this.currentExp(expDiff);
+        }
+        return this.currentExp() + '/' + this.requiredExp()
     }
 
     /**
