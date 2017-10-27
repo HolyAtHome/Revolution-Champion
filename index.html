@@ -1,20 +1,22 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Revolution Champion</title>
-  <meta name="description" content="A Small 'Game'">
-  <meta name="author" content="Holyoneqt">
+    <title>Revolution Champion</title>
+    <meta name="description" content="A Small 'Game'">
+    <meta name="author" content="Holyoneqt">
 
-  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="navigation">
         <a data-bind="click: changeNavigation('Town')">Town</a>
         <a data-bind="click: changeNavigation('Adventure')">Adventure</a>
+        <a data-bind="click: changeNavigation('Dungeons')">Dungeons</a>
         <a data-bind="click: changeNavigation('Market')">Market</a>
         <a data-bind="click: changeNavigation('Options')">Options</a>
     </div>
@@ -60,15 +62,19 @@
         </table>
     </div>
 
+    <div class="main-div town-div" data-bind="visible: isNavigation('Town')">
+        Town
+    </div>
+
     <div class="main-div adventure-div" data-bind="visible: isNavigation('Adventure')">
         <div class="navigation adventure-nav">
             <!-- ko foreach: $Adventures -->
-                <a data-bind="text: $data.name, click: function() { $root.startAdventure($data.name()) }"></a>
+            <a data-bind="text: $data.name, click: function() { $root.startAdventure($data.name()) }"></a>
             <!-- /ko -->
         </div>
         <div data-bind="with: currentAdventure, visible: currentAdventure">
             <h1 style="text-align: center" data-bind="text: $data.name"></h1>
-            <button data-bind="click: $data.startFight">Start</button>
+            <button data-bind="click: $data.startFight, disable: $root.player.isDead()">Start</button>
             <div data-bind="visible: $data.isFighting">
                 <button data-bind="click: $data.attack">Attack</button>
                 <table class="monster-table">
@@ -103,6 +109,18 @@
         </div>
     </div>
 
+    <div class="main-div dungeons-div" data-bind="visible: isNavigation('Dungeons')">
+        Dungeons
+    </div>
+
+    <div class="main-div market-div" data-bind="visible: isNavigation('Market')">
+        Market
+    </div>
+
+    <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
+        Optins
+    </div>
+
     <!-- Scripts -->
     <script src="./lib/require.js"></script>
     <script src="./built/require-config.js"></script>
@@ -110,4 +128,5 @@
         require(["built/core/core"]);
     </script>
 </body>
+
 </html>
