@@ -1,13 +1,18 @@
-import { Interval } from './../util/Interval';
 import * as ko from 'knockout';
 import { Entity } from './Entity';
 import { Monster } from './Monster';
+import { Item } from '../items/Item';
+import { Interval } from './../util/Interval';
 
 export class Player extends Entity {
     
     exp: KnockoutComputed<String>;
     currentExp: KnockoutObservable<number>;
     requiredExp: KnockoutComputed<number>;
+
+    gold: KnockoutObservable<number>;
+
+    backpack: KnockoutObservableArray<Item>;
 
     isFighting: KnockoutObservable<boolean>;
 
@@ -21,7 +26,12 @@ export class Player extends Entity {
         this.requiredExp = ko.computed(() => Math.floor(100 * Math.pow(this.level(), 0.75)));
         this.exp = ko.computed(() => this.checkExp());
 
+        this.gold = ko.observable(0);
+
+        this.backpack = ko.observableArray([]);
+
         this.isFighting = ko.observable(false);
+
         new Interval('HP-Reg', () => { this.regenerateHP(this); }, 500).start();
     }
 
@@ -32,6 +42,7 @@ export class Player extends Entity {
      */
     public onMonsterKill(monster: Monster): void {
         this.rewardExp(monster.level());
+        this.backpack(this.backpack().concat(monster.loot));
     }
 
     /**
@@ -53,6 +64,14 @@ export class Player extends Entity {
             this.currentExp(expDiff);
         }
         return this.currentExp() + '/' + this.requiredExp()
+    }
+
+    /**
+     * Revives the Player
+     * @memberof Player
+     */
+    public revive(): void {
+        this.currentHealth(this.maxHealth());
     }
 
     /**

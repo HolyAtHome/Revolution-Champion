@@ -19,6 +19,7 @@ class Core {
         this.currentAdventure = ko.observable(undefined);
 
         this.navigation(startNav);
+        console.log('Starting with Navigation "' + this.navigation() + '"');
     }
 
     isNavigation(nav: String) : boolean {

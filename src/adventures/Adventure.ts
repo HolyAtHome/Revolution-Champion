@@ -40,6 +40,7 @@ export class Adventure {
             if(this.player.isDead()) {
                 this.isFighting(false);
                 this.player.isFighting(false);
+                this.monster().reset();
                 Global.$Navigation('Town');
             }
             if(this.monster().isDead()) {

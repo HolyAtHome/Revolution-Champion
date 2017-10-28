@@ -55,15 +55,20 @@
                     <progress class="expbar" data-bind="attr: { max: player.requiredExp, value: player.currentExp }"></progress>
                 </td>
             </tr>
-            <!-- <tr>
+            <tr>
                 <td>Gold</td>
-                <td data-bind="text: player.Gold" />
-            </tr> -->
+                <td data-bind="text: player.gold" />
+            </tr>
         </table>
+        <ul>
+            <!-- ko foreach: player.backpack -->
+            <li data-bind="text: $data.name"></li>
+            <!-- /ko -->
+        </ul>
     </div>
 
     <div class="main-div town-div" data-bind="visible: isNavigation('Town')">
-        Town
+        <button data-bind="visible: player.isDead(), click: player.revive()">Revive</button>
     </div>
 
     <div class="main-div adventure-div" data-bind="visible: isNavigation('Adventure')">

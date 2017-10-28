@@ -3,12 +3,15 @@
 This is a small game :)
 
 ## ToFinish-List:
-* Implements that you can be resurrected in Town
-* Implements Gold
+* Implements that you can be Revive in Town [x]
+* Implements Gold [x]
 
 ## Feature ToDo-List:
+* Add Loot from Monsters _[x]_
+    * Add Loot-Tables
 * Add Options-Panel
 * Implement Town-Panel
+* Implements Market-Panel
 * Add Quests    
     * Can be accepted in the Town
     * Rewards Gold / Items / etc...
@@ -17,8 +20,10 @@ This is a small game :)
     * Get Skill-Points on Level-Up
     * Can be spent for Upgrading Stats
 * Add Talent-System
-* Add Items
-    * Looted from Adventures
+* Add Items ___In Progress___
+    * Add Stackable Items
+    * Looted from Adventures 
+        * Add Loot-Tables
     * Can be sold for Gold on the Market
 * Add Equipment
     * Can be crafted

@@ -1,3 +1,4 @@
+import { Item } from '../items/Item';
 import * as ko from 'knockout';
 import { Global } from './../core/Global';
 import { Entity } from './Entity';
@@ -6,11 +7,13 @@ export class Monster extends Entity {
 
     name: KnockoutObservable<String>;
 
+    loot: Array<Item>;
+
     constructor(minLvl: number, maxLvl: number) {
         super();
         this.level(Math.floor(Math.floor(Math.random() * (maxLvl - minLvl + 1)) + minLvl));
-        var lowLvl = (this.level() - 3 < 0) ? 0 : (this.level() - 3);
-        var highLvl = this.level() + 3;
+        var lowLvl = (this.level() - 8 < 0) ? 0 : (this.level() - 8);
+        var highLvl = this.level() + 8;
         this.stamina(Math.floor(Math.floor(Math.random() * (highLvl - lowLvl + 1)) + lowLvl));
         this.strength(Math.floor(Math.floor(Math.random() * (highLvl-1 - lowLvl + 1)) + lowLvl));
         
@@ -20,6 +23,15 @@ export class Monster extends Entity {
         this.currentHealth(this.maxHealth());
 
         this.name = ko.observable(Global.$MonsterNames[Math.floor(Math.random() * Global.$MonsterNames.length)]);
+        this.loot = Global.$Items.junk.getRandom(3);
     }
     
+    /**
+     * Resets the Monster back to Initial State.
+     * @memberof Monster
+     */
+    public reset(): void {
+        this.currentHealth(this.maxHealth());
+    }
+
 }
