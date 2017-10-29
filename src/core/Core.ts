@@ -1,7 +1,7 @@
 import { Interval } from './../util/Interval';
 import * as ko from 'knockout';
 import { Global } from './Global';
-import { Player } from '../entities/Player';
+import { Player } from '../entities/player/Player';
 import { Adventure } from './../adventures/Adventure';
 
 class Core {

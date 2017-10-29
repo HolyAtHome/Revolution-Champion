@@ -1,6 +1,6 @@
 import * as ko from 'knockout';
 import { Global } from './../core/Global';
-import { Player } from './../entities/Player';
+import { Player } from './../entities/player/Player';
 import { Monster } from './../entities/Monster';
 
 export class Adventure {

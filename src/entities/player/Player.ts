@@ -1,8 +1,9 @@
+import { Backpack } from './features/Backpack';
 import * as ko from 'knockout';
-import { Entity } from './Entity';
-import { Monster } from './Monster';
-import { Item } from '../items/Item';
-import { Interval } from './../util/Interval';
+import { Entity } from './../Entity';
+import { Monster } from './../Monster';
+import { Item } from './../../items/Item';
+import { Interval } from './../../util/Interval';
 
 export class Player extends Entity {
     
@@ -12,7 +13,7 @@ export class Player extends Entity {
 
     gold: KnockoutObservable<number>;
 
-    backpack: KnockoutObservableArray<Item>;
+    backpack: Backpack;
 
     isFighting: KnockoutObservable<boolean>;
 
@@ -28,7 +29,7 @@ export class Player extends Entity {
 
         this.gold = ko.observable(0);
 
-        this.backpack = ko.observableArray([]);
+        this.backpack = new Backpack();
 
         this.isFighting = ko.observable(false);
 
@@ -42,7 +43,7 @@ export class Player extends Entity {
      */
     public onMonsterKill(monster: Monster): void {
         this.rewardExp(monster.level());
-        this.backpack(this.backpack().concat(monster.loot));
+        this.backpack.addItems(monster.loot);
     }
 
     /**

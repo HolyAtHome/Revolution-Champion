@@ -60,11 +60,13 @@
                 <td data-bind="text: player.gold" />
             </tr>
         </table>
-        <ul>
-            <!-- ko foreach: player.backpack -->
-            <li data-bind="text: $data.name"></li>
-            <!-- /ko -->
-        </ul>
+        <table data-bind="foreach: player.backpack.items">
+            <tr>
+                <td data-bind="text: $data.item.name"></td>
+                <td data-bind="text: $data.amount"></td>
+                <td data-bind="text: $data.item.goldValue"></td>
+            </tr>
+        </table>
     </div>
 
     <div class="main-div town-div" data-bind="visible: isNavigation('Town')">

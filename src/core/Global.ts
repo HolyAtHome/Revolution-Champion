@@ -1,5 +1,5 @@
 import * as ko from 'knockout';
-import { Player } from './../entities/Player';
+import { Player } from './../entities/player/Player';
 import { Adventure } from './../adventures/Adventure';
 import { ItemCollectionContainer } from '../items/collections/ItemCollectionContainer';
 

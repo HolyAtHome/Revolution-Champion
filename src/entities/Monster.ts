@@ -12,8 +12,8 @@ export class Monster extends Entity {
     constructor(minLvl: number, maxLvl: number) {
         super();
         this.level(Math.floor(Math.floor(Math.random() * (maxLvl - minLvl + 1)) + minLvl));
-        var lowLvl = (this.level() - 8 < 0) ? 0 : (this.level() - 8);
-        var highLvl = this.level() + 8;
+        var lowLvl = (this.level() - 6 < 0) ? 0 : (this.level() - 8);
+        var highLvl = this.level() + 6;
         this.stamina(Math.floor(Math.floor(Math.random() * (highLvl - lowLvl + 1)) + lowLvl));
         this.strength(Math.floor(Math.floor(Math.random() * (highLvl-1 - lowLvl + 1)) + lowLvl));
         
@@ -23,7 +23,7 @@ export class Monster extends Entity {
         this.currentHealth(this.maxHealth());
 
         this.name = ko.observable(Global.$MonsterNames[Math.floor(Math.random() * Global.$MonsterNames.length)]);
-        this.loot = Global.$Items.junk.getRandom(3);
+        this.loot = Global.$Items.junk.getRandom( Math.floor(Math.random() * 5) );
     }
     
     /**
