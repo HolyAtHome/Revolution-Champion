@@ -1,3 +1,32 @@
+* {
+    font-family: 'Lato';
+}
+
+body {
+    background-image: url('../resources/images/background.png');
+}
+
+button {
+    outline: none;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 36px;
+}
+
+button:active {
+    outline: none;
+    background-color: #dddddd;
+    box-shadow: 0 2px #666;
+    transform: translateY(1px);
+}
+
 .navigation {
     background-color: #333;
     overflow: hidden;
@@ -77,4 +106,22 @@
 
 .expbar::-webkit-progress-value {
     background: rgb(67, 46, 255);
+}
+
+.item-table {
+    font-size: 20px;
+    border-collapse: collapse;
+    border-radius: 15px;
+    width: 100%;
+    background-color: #8b5a2b;
+}
+
+.item-table th {
+    border-bottom: 2px solid black;
+}
+
+.item-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }

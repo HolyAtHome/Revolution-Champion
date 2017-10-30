@@ -20,6 +20,10 @@ class Core {
 
         this.navigation(startNav);
         console.log('Starting with Navigation "' + this.navigation() + '"');
+
+        console.log('Currently we have some Development Things going on. Delet these thing in core.ts later.');
+        this.player.backpack.addItems(Global.$Items.junk.getRandom(3));
+
     }
 
     isNavigation(nav: String) : boolean {
@@ -40,3 +44,4 @@ Global.$Init();
 
 let core = new Core('Town');
 ko.applyBindings(core);
+core.navigation('Market');

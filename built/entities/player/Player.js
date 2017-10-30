@@ -35,6 +35,18 @@ define(["require", "exports", "./features/Backpack", "knockout", "./../Entity", 
         Player.prototype.onMonsterKill = function (monster) {
             this.rewardExp(monster.level());
             this.backpack.addItems(monster.loot);
+            this.sell;
+        };
+        /**
+         * Sells an Item and add the Gold-Value to the Player's gold.
+         * @param {Item} item Item to sell.
+         * @param {number} amount How many times to sell it. (Default is 1)
+         * @memberof Player
+         */
+        Player.prototype.sell = function (item, amount) {
+            if (amount === void 0) { amount = 1; }
+            this.backpack.sell(item, amount);
+            this.gold(this.gold() + (item.goldValue * amount));
         };
         /**
          * Rewards Experience to the Player based on the Level of the Monster that was slain.

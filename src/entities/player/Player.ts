@@ -47,6 +47,17 @@ export class Player extends Entity {
     }
 
     /**
+     * Sells an Item and add the Gold-Value to the Player's gold.
+     * @param {Item} item Item to sell.
+     * @param {number} amount How many times to sell it. (Default is 1)
+     * @memberof Player
+     */
+    public sell(item: Item, amount: number = 1) {
+        this.backpack.sell(item, amount);
+        this.gold(this.gold() + (item.goldValue * amount));
+    }
+
+    /**
      * Rewards Experience to the Player based on the Level of the Monster that was slain. 
      * Formula: 150 / (10 - Monsterlevel-Difference) * Playerlevel
      * @param {number} monsterLvl Level of the Monster killed.

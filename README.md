@@ -2,6 +2,9 @@
 
 This is a small game :)
 
+## ToFix-List:
+* When Player sells more than present of a given Item, only sell max available.
+
 ## Feature ToDo-List:
 * Add Loot from Monsters 
     * Monsters drop Loot _done_
@@ -9,7 +12,12 @@ This is a small game :)
 * Add Options-Panel
 * Implement Town-Panel
 * Implements Market-Panel ___In Progress___
-    * Items can be sold here
+    * Items can be sold here _done_
+    * Add Merchants
+* Add Profession-Panels
+    * Blacksmith
+    * Alchemist
+    * ...
 * Add Quests    
     * Can be accepted in the Town
     * Rewards Gold / Items / etc...

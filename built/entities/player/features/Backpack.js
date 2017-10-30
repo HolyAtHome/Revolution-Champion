@@ -37,6 +37,22 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             items.forEach(function (i) { return _this.addItem(i); });
         };
         /**
+         * Sells an Item from the Backpack
+         *
+         * @param {Item} item Item to sell
+         * @param {number} amount How many times to sell the Item
+         * @memberof Backpack
+         */
+        Backpack.prototype.sell = function (item, amount) {
+            var toReplace = this.find(item);
+            if (toReplace.amount - amount <= 0) {
+                this.items.remove(toReplace);
+            }
+            else {
+                this.items.replace(toReplace, { item: toReplace.item, amount: toReplace.amount - amount });
+            }
+        };
+        /**
          * Adds an Item to the Stack.
          * The Item must already be present in the Backpack.
          *

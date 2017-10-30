@@ -9,6 +9,7 @@
     <meta name="description" content="A Small Game!">
     <meta name="author" content="Holyoneqt">
 
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -121,7 +122,27 @@
     </div>
 
     <div class="main-div market-div" data-bind="visible: isNavigation('Market')">
-        Market
+        <table class="item-table">
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <!-- ko foreach: player.backpack.items -->
+            <tr>
+                <td data-bind="text: $data.item.name"></td>
+                <td style="text-align: center;" data-bind="text: $data.amount"></td>
+                <td>
+                    <p style="margin: 0; float: left;" data-bind="text: $data.item.goldValue"></p>
+                    <img src="resources/images/goldcoin.png" alt="goldcoin" style="width: 16px; height: 16px;" />
+                </td>
+                <td>
+                    <button data-bind="click: function() { $root.player.sell($data.item, 1) }">Sell</button>
+                </td>
+            </tr>
+            <!-- /ko -->
+        </table>
     </div>
 
     <div class="main-div options-div" data-bind="visible: isNavigation('Options')">

@@ -41,6 +41,22 @@ export class Backpack {
     }
 
     /**
+     * Sells an Item from the Backpack
+     * 
+     * @param {Item} item Item to sell
+     * @param {number} amount How many times to sell the Item
+     * @memberof Backpack
+     */
+    public sell(item: Item, amount: number): void {
+        let toReplace = this.find(item);
+        if(toReplace.amount - amount <= 0) {
+            this.items.remove(toReplace);
+        } else {
+            this.items.replace(toReplace, { item: toReplace.item, amount: toReplace.amount - amount});
+        }
+    }
+
+    /**
      * Adds an Item to the Stack.
      * The Item must already be present in the Backpack.
      * 
