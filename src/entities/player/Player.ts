@@ -15,6 +15,8 @@ export class Player extends Entity {
 
     backpack: Backpack;
 
+    statPoints: KnockoutObservable<number>;
+
     isFighting: KnockoutObservable<boolean>;
 
     constructor() {
@@ -31,7 +33,11 @@ export class Player extends Entity {
 
         this.backpack = new Backpack();
 
+        this.statPoints = ko.observable(0);
+
         this.isFighting = ko.observable(false);
+
+        this.level.subscribe(() => this.onLevelUp());
 
         new Interval('HP-Reg', () => { this.regenerateHP(this); }, 500).start();
     }
@@ -69,21 +75,53 @@ export class Player extends Entity {
         this.currentExp(this.currentExp() + Math.floor(expReward));
     }
 
+    /**
+     * Revives the Player
+     * 
+     * @memberof Player
+     */
+    public revive(): void {
+        this.currentHealth(this.maxHealth());
+    }
+
+    /**
+     * Increases a Stat by a given amount.
+     * 
+     * @param {KnockoutObservable<number>} stat The Observable Stat to increase
+     * @param {number} amount By which amount to increase.
+     * @memberof Player
+     */
+    public increaseStat(stat: KnockoutObservable<number>, amount: number): void {
+        stat(stat() + amount);
+        this.statPoints(this.statPoints() - amount);
+    }
+
+    /**
+     * This function is used to Calculate and Display the Level of the Player
+     * 
+     * @private
+     * @returns {String} Formatted Experience-Display
+     * @memberof Player
+     */
     private checkExp(): String {
         if(this.currentExp() >= this.requiredExp()) {
             let expDiff = this.currentExp() - this.requiredExp();
             this.level(this.level() + 1);
+            this.statPoints(this.statPoints() + 1);
             this.currentExp(expDiff);
         }
         return this.currentExp() + '/' + this.requiredExp()
     }
 
     /**
-     * Revives the Player
+     * This functions Subscribes to the Level of the Player
+     * 
+     * @private
      * @memberof Player
      */
-    public revive(): void {
-        this.currentHealth(this.maxHealth());
+    private onLevelUp(): void {
+        this.stamina(this.stamina() + 1);
+        this.strength(this.strength() + 1);
     }
 
     /**

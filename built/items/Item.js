@@ -14,10 +14,13 @@ define(["require", "exports"], function (require, exports) {
          * @param {number} goldValue How much gold to get when sold by Player
          * @memberof Item
          */
-        function Item(name, desc, goldValue) {
+        function Item(id, name, desc, goldValue, type) {
+            this.id = id;
             this.name = name;
             this.description = desc;
             this.goldValue = goldValue;
+            this.itemType = type;
+            this.iconSource = 'resources/images/items/' + type + '.png';
         }
         return Item;
     }());

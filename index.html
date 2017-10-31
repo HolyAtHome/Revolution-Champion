@@ -24,41 +24,45 @@
     <div class="player-div">
         <table class="player-table">
             <tr>
-                <td colspan="2">
-                    <img src="resources/images/Warrior.png" alt="Warrior" height="96" width="96">
+                <td colspan="3">
+                    <img class="center" src="resources/images/Warrior.png" alt="Warrior" height="96" width="96">
                 </td>
             </tr>
             <tr>
-                <td colspan="2" data-bind="text: player.health" style="text-align: center"></td>
+                <td colspan="3" class="text-center" data-bind="text: player.health"></td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="3">
                     <progress class="healthbar" data-bind="attr: { max: player.maxHealth, value: player.currentHealth }"></progress>
                 </td>
             </tr>
             <tr>
                 <td>Stamina</td>
                 <td data-bind="text: player.stamina" />
+                <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.stamina, 1); }, visible: player.statPoints() > 0">+</button></td>
             </tr>
             <tr>
                 <td>Strength</td>
                 <td data-bind="text: player.strength" />
+                <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.strength, 1); }, visible: player.statPoints() > 0">+</button></td>
             </tr>
             <tr>
                 <td>Level</td>
                 <td data-bind="text: player.level" />
+                <td></td>
             </tr>
             <tr>
-                <td colspan="2" data-bind="text: player.exp" style="text-align: center"></td>
+                <td colspan="3" class="text-center" data-bind="text: player.exp"></td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="3">
                     <progress class="expbar" data-bind="attr: { max: player.requiredExp, value: player.currentExp }"></progress>
                 </td>
             </tr>
             <tr>
                 <td>Gold</td>
-                <td data-bind="text: player.gold" />
+                <td data-bind="text: player.gold"></td>
+                <td></td>
             </tr>
         </table>
         <table data-bind="foreach: player.backpack.items">
@@ -69,7 +73,7 @@
             </tr>
         </table>
     </div>
-
+    
     <div class="main-div town-div" data-bind="visible: isNavigation('Town')">
         <button data-bind="visible: player.isDead(), click: player.revive()">Revive</button>
     </div>
@@ -81,39 +85,42 @@
             <!-- /ko -->
         </div>
         <div data-bind="with: currentAdventure, visible: currentAdventure">
-            <h1 style="text-align: center" data-bind="text: $data.name"></h1>
-            <button data-bind="click: $data.startFight, disable: $root.player.isDead()">Start</button>
+            <h1 class="text-center" data-bind="text: $data.name"></h1>
+            <h4 class="text-center" data-bind="text: 'Recommended Level: ' + $data.requiredLevel()"></h4>
+            <button class="button-xxl center" data-bind="click: $data.startFight, disable: $root.player.isDead()">Start</button>
             <div data-bind="visible: $data.isFighting">
-                <button data-bind="click: $data.attack">Attack</button>
-                <table class="monster-table">
-                    <tr>
-                        <td>Name</td>
-                        <td data-bind="text: $data.monster().name" />
-                    </tr>
-                    <tr>
-                        <td colspan="2" data-bind="text: $data.monster().health" style="text-align: center"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <progress class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Stamina</td>
-                        <td data-bind="text: $data.monster().stamina" />
-                    </tr>
-                    <tr>
-                        <td>Strength</td>
-                        <td data-bind="text: $data.monster().strength" />
-                    </tr>
-                    <tr>
-                        <td>Level</td>
-                        <td data-bind="text: $data.monster().level" />
-                    </tr>
-                </table>
+                <div>
+                    <button class="center margin-small" data-bind="click: $data.attack">Attack</button>
+                </div>
+                <div class="center">
+                    <table class="monster-table">
+                        <tr>
+                            <td>Name</td>
+                            <td data-bind="text: $data.monster().name" />
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-center" data-bind="text: $data.monster().health"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <progress class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Stamina</td>
+                            <td data-bind="text: $data.monster().stamina" />
+                        </tr>
+                        <tr>
+                            <td>Strength</td>
+                            <td data-bind="text: $data.monster().strength" />
+                        </tr>
+                        <tr>
+                            <td>Level</td>
+                            <td data-bind="text: $data.monster().level" />
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <p data-bind="text: $root.player.level"></p>
-            <p data-bind="text: $data.requiredLevel"></p>
         </div>
     </div>
 
@@ -122,20 +129,23 @@
     </div>
 
     <div class="main-div market-div" data-bind="visible: isNavigation('Market')">
-        <table class="item-table">
-            <tr>
-                <th>Name</th>
-                <th>Amount</th>
-                <th></th>
-                <th></th>
+        <h1 class="text-center">Sell</h1>
+        <table class="table-wide item-table">
+            <tr style="text-align: left">
+                <th style="width: 5%"></th>
+                <th style="width: 45%">Name</th>
+                <th style="width: 20%">Amount</th>
+                <th style="width: 10%"></th>
+                <th style="width: 20%"></th>
             </tr>
             <!-- ko foreach: player.backpack.items -->
             <tr>
+                <td><img class="icon-img" data-bind="attr: { src: $data.item.iconSource, title: $data.item.itemType }"/></td>
                 <td data-bind="text: $data.item.name"></td>
-                <td style="text-align: center;" data-bind="text: $data.amount"></td>
+                <td class="text-center" data-bind="text: $data.amount"></td>
                 <td>
                     <p style="margin: 0; float: left;" data-bind="text: $data.item.goldValue"></p>
-                    <img src="resources/images/goldcoin.png" alt="goldcoin" style="width: 16px; height: 16px;" />
+                    <img class="icon-img" src="resources/images/goldcoin.png" alt="goldcoin"/>
                 </td>
                 <td>
                     <button data-bind="click: function() { $root.player.sell($data.item, 1) }">Sell</button>
@@ -143,18 +153,22 @@
             </tr>
             <!-- /ko -->
         </table>
+        <h1 class="text-center">Buy</h1>
+        <table class="table-wide item-table">
+            
+        </table>
     </div>
 
     <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
         Optins
     </div>
-
+    
     <!-- Scripts -->
     <script src="./lib/require.js"></script>
     <script src="./built/require-config.js"></script>
     <script>
         require(["./built/core/core"]);
-    </script>
+        </script>
 </body>
 
 </html>

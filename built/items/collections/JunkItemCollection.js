@@ -8,11 +8,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "../Item", "./ItemCollection"], function (require, exports, Item_1, ItemCollection_1) {
+define(["require", "exports", "./../ItemType", "../Item", "./ItemCollection"], function (require, exports, ItemType_1, Item_1, ItemCollection_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
-     * Collection of Junk-Items.
+     * Collection of Junk-Items. (ID-Range: 10001 - 10999)
      *
      * @export
      * @class JunkItemCollection
@@ -22,20 +22,20 @@ define(["require", "exports", "../Item", "./ItemCollection"], function (require,
         __extends(JunkItemCollection, _super);
         function JunkItemCollection() {
             var _this = _super.call(this) || this;
-            _this.add(new Item_1.Item('Used Bandage', '', 1));
-            _this.add(new Item_1.Item("Broken Sword", '', 4));
-            _this.add(new Item_1.Item('Glas Shards', '', 2));
-            _this.add(new Item_1.Item('Torn off Cloth', '', 2));
-            _this.add(new Item_1.Item('Weird looking "Egg"', '', 10));
-            _this.add(new Item_1.Item('Broken Stem', '', 1));
-            _this.add(new Item_1.Item('Old Book', '', 6));
-            _this.add(new Item_1.Item('Small Key', 'It\'s broken.', 3));
-            _this.add(new Item_1.Item('Common Quartz Crystal', '', 6));
-            _this.add(new Item_1.Item('Small Feather', '', 1));
-            _this.add(new Item_1.Item('Broken Claw', '', 1));
-            _this.add(new Item_1.Item('Small Tusk', '', 2));
-            _this.add(new Item_1.Item('Unreadable Letter', '', 1));
-            _this.add(new Item_1.Item('Bag of Marbles', '', 3));
+            _this.add(new Item_1.Item(10001, 'Used Bandage', '', 1, ItemType_1.ItemType.Crafting));
+            _this.add(new Item_1.Item(10002, 'Broken Sword', '', 4, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10003, 'Glas Shards', '', 2, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10004, 'Torn off Cloth', '', 2, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10005, 'Weird looking "Egg"', '', 10, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10006, 'Broken Stem', '', 1, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10007, 'Old Book', '', 6, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10008, 'Small Key', 'It\'s broken.', 3, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10009, 'Common Quartz Crystal', '', 6, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10010, 'Small Feather', '', 1, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10011, 'Broken Claw', '', 1, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10012, 'Small Tusk', '', 2, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10013, 'Unreadable Letter', '', 1, ItemType_1.ItemType.Junk));
+            _this.add(new Item_1.Item(10014, 'Bag of Marbles', '', 3, ItemType_1.ItemType.Junk));
             return _this;
         }
         return JunkItemCollection;

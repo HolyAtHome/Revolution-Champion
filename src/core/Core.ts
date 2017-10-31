@@ -23,7 +23,6 @@ class Core {
 
         console.log('Currently we have some Development Things going on. Delet these thing in core.ts later.');
         this.player.backpack.addItems(Global.$Items.junk.getRandom(3));
-
     }
 
     isNavigation(nav: String) : boolean {

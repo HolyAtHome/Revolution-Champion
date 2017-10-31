@@ -81,13 +81,13 @@ export class Backpack {
      * @memberof Backpack
      */
     private isAlreadyInBackpack(item: Item): boolean {
-        // NOTE: Currently only checks for name. Maybe change to Object-Compare.
+        // NOTE: Currently only checks for ID. Maybe change to Object-Compare.
         return (this.find(item) != null);
     }
 
     /**
      * Returns the Item from the Backpack. Null if not current.
-     * NOTE: Only checks if the Item name is the same. Maybe add a Deep-Object Compare
+     * NOTE: Only checks if the Item ID is the same. Maybe add a Deep-Object Compare
      * 
      * @private
      * @param {Item} item Item to find.
@@ -96,7 +96,7 @@ export class Backpack {
      */
     private find(item: Item): IStackedItem {
         for(let i = 0; i < this.items().length; i++) {
-            if(this.items()[i].item.name === item.name) {
+            if(this.items()[i].item.id === item.id) {
                 return this.items()[i];
             }
         }

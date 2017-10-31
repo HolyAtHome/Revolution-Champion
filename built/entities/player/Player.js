@@ -23,7 +23,9 @@ define(["require", "exports", "./features/Backpack", "knockout", "./../Entity", 
             _this.exp = ko.computed(function () { return _this.checkExp(); });
             _this.gold = ko.observable(0);
             _this.backpack = new Backpack_1.Backpack();
+            _this.statPoints = ko.observable(0);
             _this.isFighting = ko.observable(false);
+            _this.level.subscribe(function () { return _this.onLevelUp(); });
             new Interval_1.Interval('HP-Reg', function () { _this.regenerateHP(_this); }, 500).start();
             return _this;
         }
@@ -35,7 +37,6 @@ define(["require", "exports", "./features/Backpack", "knockout", "./../Entity", 
         Player.prototype.onMonsterKill = function (monster) {
             this.rewardExp(monster.level());
             this.backpack.addItems(monster.loot);
-            this.sell;
         };
         /**
          * Sells an Item and add the Gold-Value to the Player's gold.
@@ -59,20 +60,50 @@ define(["require", "exports", "./features/Backpack", "knockout", "./../Entity", 
             var expReward = 150 / (10 - monsterLevelDiff) * this.level();
             this.currentExp(this.currentExp() + Math.floor(expReward));
         };
+        /**
+         * Revives the Player
+         *
+         * @memberof Player
+         */
+        Player.prototype.revive = function () {
+            this.currentHealth(this.maxHealth());
+        };
+        /**
+         * Increases a Stat by a given amount.
+         *
+         * @param {KnockoutObservable<number>} stat The Observable Stat to increase
+         * @param {number} amount By which amount to increase.
+         * @memberof Player
+         */
+        Player.prototype.increaseStat = function (stat, amount) {
+            stat(stat() + amount);
+            this.statPoints(this.statPoints() - amount);
+        };
+        /**
+         * This function is used to Calculate and Display the Level of the Player
+         *
+         * @private
+         * @returns {String} Formatted Experience-Display
+         * @memberof Player
+         */
         Player.prototype.checkExp = function () {
             if (this.currentExp() >= this.requiredExp()) {
                 var expDiff = this.currentExp() - this.requiredExp();
                 this.level(this.level() + 1);
+                this.statPoints(this.statPoints() + 1);
                 this.currentExp(expDiff);
             }
             return this.currentExp() + '/' + this.requiredExp();
         };
         /**
-         * Revives the Player
+         * This functions Subscribes to the Level of the Player
+         *
+         * @private
          * @memberof Player
          */
-        Player.prototype.revive = function () {
-            this.currentHealth(this.maxHealth());
+        Player.prototype.onLevelUp = function () {
+            this.stamina(this.stamina() + 1);
+            this.strength(this.strength() + 1);
         };
         /**
          * Used for Interval. Gets called every 3 seconds to regenerate 5HP

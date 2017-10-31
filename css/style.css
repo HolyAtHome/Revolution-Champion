@@ -16,6 +16,7 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
     padding: 4px 36px;
 }
@@ -25,6 +26,36 @@ button:active {
     background-color: #dddddd;
     box-shadow: 0 2px #666;
     transform: translateY(1px);
+}
+
+.button-xl {
+    padding: 8px 72px;
+}
+
+.button-xxl {
+    padding: 16px 144px;
+}
+
+.table-wide {
+    width: 100%;
+}
+
+.margin-small {
+    margin: 2.5px;
+}
+
+.center {
+    display: block;
+    margin: 2.5px auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.icon-img {
+    width: 16px;
+    height: 16px;
 }
 
 .navigation {
@@ -111,7 +142,6 @@ button:active {
 .item-table {
     font-size: 20px;
     border-collapse: collapse;
-    border-radius: 15px;
     width: 100%;
     background-color: #8b5a2b;
 }
@@ -125,3 +155,15 @@ button:active {
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
+
+.button-increase {
+    background: transparent;
+    font-size: 18px;
+    color: darkgreen;
+    padding: 0;
+    border: 0;
+    height: 21px;
+    width: auto;
+}
+
+.button-increase:hover { cursor: pointer; }
