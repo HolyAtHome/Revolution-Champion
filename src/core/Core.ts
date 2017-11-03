@@ -1,18 +1,21 @@
-import { Interval } from './../util/Interval';
 import * as ko from 'knockout';
 import { Global } from './Global';
+import { Interval } from './../util/Interval';
 import { Player } from '../entities/player/Player';
 import { Adventure } from './../adventures/Adventure';
+import { Building } from './../buildings/Building';
 
 class Core {
     $Adventures: KnockoutObservableArray<Adventure>;
+    $Buildings: KnockoutObservableArray<Building>;
 
     navigation: KnockoutObservable<String>;
     player: Player;
     currentAdventure: KnockoutObservable<Adventure>;
 
     constructor(startNav: String) {
-        this.$Adventures = Global.$Adventures;
+        this.$Adventures = Global.$Adventures.all();
+        this.$Buildings = Global.$Buildings.all();
 
         this.navigation = Global.$Navigation;
         this.player = Global.$Player;
@@ -34,7 +37,7 @@ class Core {
     }
 
     startAdventure(adv: String) {
-        this.currentAdventure(Global.$FindAdventure(Global.$Adventures(), adv));
+        this.currentAdventure(Global.$FindAdventure(Global.$Adventures.all()(), adv));
     }
 
 }

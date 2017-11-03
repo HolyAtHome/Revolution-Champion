@@ -1,4 +1,4 @@
-export class ItemType {
-    static Junk = 'Junk';
-    static Crafting = 'Crafting';
+export enum ItemType {
+    Junk = 'Junk',
+    Crafting = 'Crafting'
 }

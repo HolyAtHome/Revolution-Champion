@@ -76,6 +76,15 @@
     
     <div class="main-div town-div" data-bind="visible: isNavigation('Town')">
         <button data-bind="visible: player.isDead(), click: player.revive()">Revive</button>
+        <!-- ko foreach: $Buildings -->
+        <div class="building-card">
+            <img class="card-image" src="resources/images/Warrior.png" alt="pic">
+            <div class="card-container">
+                <p data-bind="text: $data.name"></p>
+                <p data-bind="text: $data.description"></p>
+            </div>
+        </div>
+        <!-- /ko -->
     </div>
 
     <div class="main-div adventure-div" data-bind="visible: isNavigation('Adventure')">

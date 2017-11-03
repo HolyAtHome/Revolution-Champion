@@ -3,7 +3,8 @@ define(["require", "exports", "knockout", "./Global"], function (require, export
     Object.defineProperty(exports, "__esModule", { value: true });
     var Core = /** @class */ (function () {
         function Core(startNav) {
-            this.$Adventures = Global_1.Global.$Adventures;
+            this.$Adventures = Global_1.Global.$Adventures.all();
+            this.$Buildings = Global_1.Global.$Buildings.all();
             this.navigation = Global_1.Global.$Navigation;
             this.player = Global_1.Global.$Player;
             this.currentAdventure = ko.observable(undefined);
@@ -20,7 +21,7 @@ define(["require", "exports", "knockout", "./Global"], function (require, export
             this.navigation(newNav);
         };
         Core.prototype.startAdventure = function (adv) {
-            this.currentAdventure(Global_1.Global.$FindAdventure(Global_1.Global.$Adventures(), adv));
+            this.currentAdventure(Global_1.Global.$FindAdventure(Global_1.Global.$Adventures.all()(), adv));
         };
         return Core;
     }());
