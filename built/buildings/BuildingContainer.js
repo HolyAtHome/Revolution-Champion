@@ -4,7 +4,7 @@ define(["require", "exports", "knockout", "./Building"], function (require, expo
     var BuildingContainer = /** @class */ (function () {
         function BuildingContainer() {
             this.data = ko.observableArray([
-                new Building_1.Building('b1', 'its a b'),
+                new Building_1.Building('b1', 'its a b', 'overgrown_house.png'),
                 new Building_1.Building('b2', 'yeah boii'),
                 new Building_1.Building('b3', 'something'),
                 new Building_1.Building('b4', 'something'),

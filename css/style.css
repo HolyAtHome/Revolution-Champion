@@ -105,24 +105,27 @@ button:active {
 }
 
 .building-card {
-    width: 25%;
+    width: 30%;
     height: 30%;
     border: 1px solid black;
     float: left;
     margin: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 5px;
+    z-index: 0;
 }
 
 .card-image {
     width: 100%;
-    height: 55%;
+    height: 100%;
     border-radius: 5px 5px 0 0;
+    z-index: 1;
 }
 
 .card-container {
     background-color: white;
     padding: 2px 16px;
+    z-index: 2;
 }
 
 .adventure-nav { background-color: rgb(148, 97, 50); display: flex; }

@@ -11,6 +11,7 @@ This is a small game :)
     * Add Loot-Tables
 * Add Options-Panel
 * Implement Town-Panel
+    * Add as source: https://rgbfumes.deviantart.com
 * Implements Market-Panel ___In Progress___
     * Items can be sold here _done_
     * Add Merchants

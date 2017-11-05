@@ -7,7 +7,7 @@ export class BuildingContainer {
 
     constructor() {
         this.data = ko.observableArray([
-            new Building('b1', 'its a b'),
+            new Building('b1', 'its a b', 'overgrown_house.png'),
             new Building('b2', 'yeah boii'),
             new Building('b3', 'something'),
             new Building('b4', 'something'),
