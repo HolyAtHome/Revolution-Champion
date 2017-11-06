@@ -11,7 +11,10 @@ This is a small game :)
     * Add Loot-Tables
 * Add Options-Panel
 * Implement Town-Panel
-    * Add as source: https://rgbfumes.deviantart.com
+    * Add as source: 
+        * https://rgbfumes.deviantart.com
+        * https://ariathordia.deviantart.com/ (Marketplace)
+        * https://albertov.deviantart.com/ (house_2.png)
 * Implements Market-Panel ___In Progress___
     * Items can be sold here _done_
     * Add Merchants

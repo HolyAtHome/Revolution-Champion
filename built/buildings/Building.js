@@ -7,7 +7,11 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             this.name = ko.observable(name);
             this.description = ko.observable(desc);
             this.imageName = 'resources/images/buildings/' + imgName;
+            this.owned = ko.observable(false);
         }
+        Building.prototype.buy = function () {
+            this.owned(true);
+        };
         return Building;
     }());
     exports.Building = Building;

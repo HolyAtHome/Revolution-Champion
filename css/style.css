@@ -105,14 +105,24 @@ button:active {
 }
 
 .building-card {
+    position: relative;
+    display: inline-block;
     width: 30%;
-    height: 30%;
-    border: 1px solid black;
-    float: left;
+    height: 50%;
     margin: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border-radius: 5px;
     z-index: 0;
+}
+
+.building-card-locked {
+    position: absolute;
+    height: 75%;
+    width: 100%;
+    background: rgba(221,221,221,0.6);
+}
+
+.card-image-container {
+    height: 75%;
 }
 
 .card-image {
@@ -123,9 +133,16 @@ button:active {
 }
 
 .card-container {
+    height: 25%;
     background-color: white;
-    padding: 2px 16px;
+    padding: 2px 8px;
     z-index: 2;
+    border-radius: 0 0 5px 5px;
+}
+
+.building-card-buy {
+    position: absolute;
+    margin: 45% 30%;
 }
 
 .adventure-nav { background-color: rgb(148, 97, 50); display: flex; }

@@ -7,15 +7,12 @@ export class BuildingContainer {
 
     constructor() {
         this.data = ko.observableArray([
-            new Building('b1', 'its a b', 'overgrown_house.png'),
-            new Building('b2', 'yeah boii'),
-            new Building('b3', 'something'),
-            new Building('b4', 'something'),
-            new Building('b6', 'something'),
-            new Building('b7', 'something'),
-            new Building('br', 'something'),
-            new Building('bfa', 'something'),
-            new Building('bfgdgd', 'something')
+            new Building('Townhall', 'Base Building for your Town', 'overgrown_house.png'),
+            new Building('Blacksmith', 'Makes cool things out of Steel', 'house.png'),
+            new Building('Alchemist', 'Brews Potions', 'treehouse.png'),
+            new Building('Lumbermill', 'Collects Wood', 'house_2.png'),
+            new Building('Mine', 'Collects Stone and Iron', 'inn_house.png'),
+            new Building('Marketplace', 'Buy and sell Stuff', 'marketplace.png')
         ]);
     }
 
