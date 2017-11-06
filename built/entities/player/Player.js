@@ -114,10 +114,11 @@ define(["require", "exports", "./features/Backpack", "knockout", "./../Entity", 
          * @memberof Player
          */
         Player.prototype.regenerateHP = function (_) {
-            if (!_.isFighting() && !_.isDead()) {
+            if (!_.isDead()) {
+                var regeneration = _.isFighting() ? 2 : 10;
                 var curr = _.currentHealth();
-                if (curr + 5 < _.maxHealth()) {
-                    _.currentHealth(curr + 5);
+                if (curr + regeneration < _.maxHealth()) {
+                    _.currentHealth(curr + regeneration);
                 }
                 else {
                     _.currentHealth(_.maxHealth());

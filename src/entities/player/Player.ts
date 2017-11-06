@@ -136,10 +136,11 @@ export class Player extends Entity {
      * @memberof Player
      */
     private regenerateHP(_: Player) {
-        if(!_.isFighting() && !_.isDead()) {
+        if(!_.isDead()) {
+            let regeneration = _.isFighting() ? 2 : 10;
             let curr = _.currentHealth();
-            if(curr + 5 < _.maxHealth()) {
-                _.currentHealth(curr + 5);
+            if(curr + regeneration < _.maxHealth()) {
+                _.currentHealth(curr + regeneration);
             } else {
                 _.currentHealth(_.maxHealth());
             }
