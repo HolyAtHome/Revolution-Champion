@@ -25,6 +25,7 @@ class Core {
         console.log('Starting with Navigation "' + this.navigation() + '"');
 
         console.log('Currently we have some Development Things going on. Delet these thing in core.ts later.');
+        this.player.gold(1000);
         this.player.backpack.addItems(Global.$Items.junk.getRandom(3));
     }
 
@@ -46,4 +47,4 @@ Global.$Init();
 
 let core = new Core('Town');
 ko.applyBindings(core);
-core.navigation('Market');
+core.navigation('Town');

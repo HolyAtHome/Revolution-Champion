@@ -54,8 +54,8 @@ button:active {
 }
 
 .icon-img {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
 }
 
 .navigation {
@@ -93,22 +93,24 @@ button:active {
 
 .player-table {
     border: 1px solid black;
+    width: 100%;
     padding: 5px;
+    margin: 5px 0;
 }
 
 .main-div {
-    position: absolute;
+    position: relative;
     left: 16%;
-    right: 16%;
-    width: 68%;
+    right: 12%;
+    width: 82%;
     height: 100%;
 }
 
 .building-card {
     position: relative;
     display: inline-block;
-    width: 30%;
-    height: 50%;
+    width: 225px;
+    height: 300px;
     margin: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     z-index: 0;
@@ -130,6 +132,15 @@ button:active {
     height: 100%;
     border-radius: 5px 5px 0 0;
     z-index: 1;
+
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out; 
+}
+
+.card-image:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 .card-container {
@@ -145,6 +156,14 @@ button:active {
     margin: 45% 30%;
 }
 
+.building-card-cost {
+    margin: 0;
+    text-align: right;
+    float: left;
+    margin: 0 0 0 35%;
+    font-weight: bold;
+}
+
 .adventure-nav { background-color: rgb(148, 97, 50); display: flex; }
 .adventure-nav a { flex-basis: 100%; font-size: 12px;}
 .adventure-nav a:disabled { cursor: not-allowed; }
@@ -153,6 +172,7 @@ button:active {
 .healthbar {
     -webkit-appearance: none;
     height: 10px;
+    width: 100%;
 }
 
 .healthbar::-webkit-progress-bar {
@@ -168,6 +188,7 @@ button:active {
 .expbar {
     -webkit-appearance: none;
     height: 5px;
+    width: 100%;
 }
 
 .expbar::-webkit-progress-bar {

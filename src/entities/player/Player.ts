@@ -12,6 +12,9 @@ export class Player extends Entity {
     requiredExp: KnockoutComputed<number>;
 
     gold: KnockoutObservable<number>;
+    wood: KnockoutObservable<number>;
+    stone: KnockoutObservable<number>;
+    iron: KnockoutObservable<number>;
 
     backpack: Backpack;
 
@@ -30,6 +33,9 @@ export class Player extends Entity {
         this.exp = ko.computed(() => this.checkExp());
 
         this.gold = ko.observable(0);
+        this.wood = ko.observable(0);
+        this.stone = ko.observable(0);
+        this.iron = ko.observable(0);
 
         this.backpack = new Backpack();
 

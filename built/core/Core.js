@@ -11,6 +11,7 @@ define(["require", "exports", "knockout", "./Global"], function (require, export
             this.navigation(startNav);
             console.log('Starting with Navigation "' + this.navigation() + '"');
             console.log('Currently we have some Development Things going on. Delet these thing in core.ts later.');
+            this.player.gold(1000);
             this.player.backpack.addItems(Global_1.Global.$Items.junk.getRandom(3));
         }
         Core.prototype.isNavigation = function (nav) {
@@ -28,6 +29,6 @@ define(["require", "exports", "knockout", "./Global"], function (require, export
     Global_1.Global.$Init();
     var core = new Core('Town');
     ko.applyBindings(core);
-    core.navigation('Market');
+    core.navigation('Town');
 });
 //# sourceMappingURL=Core.js.map

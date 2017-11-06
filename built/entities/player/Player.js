@@ -22,6 +22,9 @@ define(["require", "exports", "./features/Backpack", "knockout", "./../Entity", 
             _this.requiredExp = ko.computed(function () { return Math.floor(100 * Math.pow(_this.level(), 0.75)); });
             _this.exp = ko.computed(function () { return _this.checkExp(); });
             _this.gold = ko.observable(0);
+            _this.wood = ko.observable(0);
+            _this.stone = ko.observable(0);
+            _this.iron = ko.observable(0);
             _this.backpack = new Backpack_1.Backpack();
             _this.statPoints = ko.observable(0);
             _this.isFighting = ko.observable(false);

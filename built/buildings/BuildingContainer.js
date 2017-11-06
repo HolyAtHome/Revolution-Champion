@@ -4,12 +4,12 @@ define(["require", "exports", "knockout", "./Building"], function (require, expo
     var BuildingContainer = /** @class */ (function () {
         function BuildingContainer() {
             this.data = ko.observableArray([
-                new Building_1.Building('Townhall', 'Base Building for your Town', 'overgrown_house.png'),
-                new Building_1.Building('Blacksmith', 'Makes cool things out of Steel', 'house.png'),
-                new Building_1.Building('Alchemist', 'Brews Potions', 'treehouse.png'),
-                new Building_1.Building('Lumbermill', 'Collects Wood', 'house_2.png'),
-                new Building_1.Building('Mine', 'Collects Stone and Iron', 'inn_house.png'),
-                new Building_1.Building('Marketplace', 'Buy and sell Stuff', 'marketplace.png')
+                new Building_1.Building('Townhall', 'Base Building for your Town', 50, 'overgrown_house.png'),
+                new Building_1.Building('Blacksmith', 'Makes cool things out of Steel', 100, 'house.png'),
+                new Building_1.Building('Alchemist', 'Brews Potions', 100, 'treehouse.png'),
+                new Building_1.Building('Lumbermill', 'Collects Wood', 100, 'house_2.png'),
+                new Building_1.Building('Mine', 'Collects Stone and Iron', 100, 'inn_house.png'),
+                new Building_1.Building('Marketplace', 'Buy and sell Stuff', 100, 'marketplace.png')
             ]);
         }
         BuildingContainer.prototype.all = function () {

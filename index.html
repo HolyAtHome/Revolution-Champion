@@ -8,6 +8,7 @@
     <title>Revolution Champion</title>
     <meta name="description" content="A Small Game!">
     <meta name="author" content="Holyoneqt">
+    <link rel="icon" type="image/png" href="resources/images/icon.png">
 
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -59,18 +60,36 @@
                     <progress class="expbar" data-bind="attr: { max: player.requiredExp, value: player.currentExp }"></progress>
                 </td>
             </tr>
-            <tr>
-                <td>Gold</td>
-                <td data-bind="text: player.gold"></td>
-                <td></td>
-            </tr>
         </table>
-        <table data-bind="foreach: player.backpack.items">
-            <tr>
-                <td data-bind="text: $data.item.name"></td>
-                <td data-bind="text: $data.amount"></td>
-                <td data-bind="text: $data.item.goldValue"></td>
-            </tr>
+        <table class="player-table">
+                <tr>
+                    <td>Gold</td>
+                    <td>
+                        <p style="margin: 0; float: left;" data-bind="text: player.gold"></p>
+                        <img class="icon-img icon-currency" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Wood</td>
+                    <td>
+                        <p style="margin: 0; float: left;" data-bind="text: player.wood"></p>
+                        <img class="icon-img icon-currency" src="resources/images/currency/wood.png" alt="wood"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Stone</td>
+                    <td>
+                        <p style="margin: 0; float: left;" data-bind="text: player.stone"></p>
+                        <img class="icon-img icon-currency" src="resources/images/currency/stone.png" alt="stone"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Iron</td>
+                    <td>
+                        <p style="margin: 0; float: left;" data-bind="text: player.iron"></p>
+                        <img style="margin-left: 2px;" class="icon-img icon-currency" src="resources/images/currency/iron.png" alt="iron"/>
+                    </td>
+                </tr>
         </table>
     </div>
     
@@ -81,8 +100,12 @@
             <div class="card-image-container">
                 <div class="building-card-locked" data-bind="visible: !$data.owned()">
                     <button class="building-card-buy" data-bind="click: $data.buy">Buy</button>
+                    <div style="margin-top: 60%">
+                        <p class="building-card-cost" data-bind="text: 'Cost: ' + $data.cost"></p>
+                        <img class="icon-img" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
+                    </div>
                 </div>
-                <img class="card-image" data-bind="attr: { src: $data.imageName }" alt="pic">
+                <img class="card-image" data-bind="attr: { src: $data.imageName }, click: $root.changeNavigation($data.name())" alt="pic">
             </div>
             <div class="card-container">
                 <p style="text-align: center; font-weight: bold; margin: 10px 0" data-bind="text: $data.name"></p>
@@ -159,7 +182,7 @@
                 <td class="text-center" data-bind="text: $data.amount"></td>
                 <td>
                     <p style="margin: 0; float: left;" data-bind="text: $data.item.goldValue"></p>
-                    <img class="icon-img" src="resources/images/goldcoin.png" alt="goldcoin"/>
+                    <img class="icon-img" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
                 </td>
                 <td>
                     <button data-bind="click: function() { $root.player.sell($data.item, 1) }">Sell</button>
@@ -173,10 +196,24 @@
         </table>
     </div>
 
-    <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
-        Optins
+    <div class="main-div townhall-div" data-bind="visible: isNavigation('Townhall')">
+            Welcome to the Townhall
     </div>
+        
+    <!-- <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
+            Optins
+    </div>
+        
+    <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
+            Optins
+    </div>
+        
+    <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
+            Optins
+    </div> -->
+        
     
+
     <!-- Scripts -->
     <script src="./lib/require.js"></script>
     <script src="./built/require-config.js"></script>
