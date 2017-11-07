@@ -1,3 +1,4 @@
+import { QuestDifficulty } from './../../quests/QuestDifficulty';
 import * as ko from 'knockout';
 import { Entity } from './../Entity';
 import { Monster } from './../Monster';
@@ -43,9 +44,10 @@ export class Player extends Entity {
         this.backpack = new Backpack();
 
         this.quests = ko.observableArray([
-            new Quest('Killing Monster', 'Kill some Monsters'),
-            new Quest('Help a Person', 'Someone is in need of help'),
-            new Quest('Collect Apples', 'We are hungry!')
+            new Quest('Collect Apples', 'We are hungry!', QuestDifficulty.EASY),
+            new Quest('Help a Person', 'Someone is in need of help', QuestDifficulty.MEDIUM),
+            new Quest('Killing Monster', 'Kill some Monsters', QuestDifficulty.HARD),
+            new Quest('Dungeon!', 'Clear a Dungeon', QuestDifficulty.HEROIC)
         ]);
 
         this.statPoints = ko.observable(0);

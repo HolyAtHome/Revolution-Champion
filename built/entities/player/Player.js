@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "knockout", "./../Entity", "./features/Backpack", "./../../quests/Quest", "./../../util/Interval"], function (require, exports, ko, Entity_1, Backpack_1, Quest_1, Interval_1) {
+define(["require", "exports", "./../../quests/QuestDifficulty", "knockout", "./../Entity", "./features/Backpack", "./../../quests/Quest", "./../../util/Interval"], function (require, exports, QuestDifficulty_1, ko, Entity_1, Backpack_1, Quest_1, Interval_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Player = /** @class */ (function (_super) {
@@ -27,9 +27,10 @@ define(["require", "exports", "knockout", "./../Entity", "./features/Backpack", 
             _this.iron = ko.observable(0);
             _this.backpack = new Backpack_1.Backpack();
             _this.quests = ko.observableArray([
-                new Quest_1.Quest('Killing Monster', 'Kill some Monsters'),
-                new Quest_1.Quest('Help a Person', 'Someone is in need of help'),
-                new Quest_1.Quest('Collect Apples', 'We are hungry!')
+                new Quest_1.Quest('Collect Apples', 'We are hungry!', QuestDifficulty_1.QuestDifficulty.EASY),
+                new Quest_1.Quest('Help a Person', 'Someone is in need of help', QuestDifficulty_1.QuestDifficulty.MEDIUM),
+                new Quest_1.Quest('Killing Monster', 'Kill some Monsters', QuestDifficulty_1.QuestDifficulty.HARD),
+                new Quest_1.Quest('Dungeon!', 'Clear a Dungeon', QuestDifficulty_1.QuestDifficulty.HEROIC)
             ]);
             _this.statPoints = ko.observable(0);
             _this.isFighting = ko.observable(false);

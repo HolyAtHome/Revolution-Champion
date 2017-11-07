@@ -58,6 +58,19 @@ button:active {
     height: 20px;
 }
 
+.loading-spinner {
+    width: 64px;
+    height: 64px;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
 .navigation {
     background-color: #333;
     overflow: hidden;
@@ -65,6 +78,7 @@ button:active {
 }
 
 .navigation a {
+    font-family: 'Cinzel';
     float: left;
     display: block;
     color: #f2f2f2;
@@ -231,12 +245,21 @@ button:active {
 
 .button-increase:hover { cursor: pointer; }
 
-.quest-list li { list-style: none; line-height: 20px; }
-.quest-list li:before {
+.quest-list { margin: 16px 32px; padding: 0; }
+.quest-list li > * { font-family: 'Cinzel'; margin: 10px; }
+.quest-list li {
+    list-style: none;
+    line-height: 20px;
+    background-color: rgb(148, 97, 50);
+    border: 1px solid rgb(83, 54, 28);
+    margin: 2px 0;
+}
+.quest-list li:hover { background-color: rgb(175, 113, 58); color: white; cursor: pointer; }
+/* .quest-list li:before {
     content: '';
     display: inline-block;
     background-image: url('../resources/images/quest.png');
     background-size: contain;
     width: 16px;
     height: 16px;
-}
+} */

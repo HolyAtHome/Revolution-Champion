@@ -1,3 +1,4 @@
+import { Quest } from './../quests/Quest';
 import * as ko from 'knockout';
 import { Global } from './Global';
 import { Interval } from './../util/Interval';
@@ -14,6 +15,7 @@ class Core {
 
     player: Player;
     currentAdventure: KnockoutObservable<Adventure>;
+    currentQuest: KnockoutObservable<Quest>
 
     constructor(startNav: String) {
         this.$Adventures = Global.$Adventures.all();
@@ -24,6 +26,7 @@ class Core {
 
         this.player = Global.$Player;
         this.currentAdventure = ko.observable(undefined);
+        this.currentQuest = ko.observable(undefined);
 
         this.navigation(startNav);
         console.log('Starting with Navigation "' + this.navigation() + '"');
@@ -50,6 +53,10 @@ class Core {
 
     startAdventure(adv: String) {
         this.currentAdventure(Global.$FindAdventure(Global.$Adventures.all()(), adv));
+    }
+
+    startQuest(q: Quest) {
+        this.currentQuest(q);
     }
 
 }

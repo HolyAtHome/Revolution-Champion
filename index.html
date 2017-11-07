@@ -11,221 +11,238 @@
     <link rel="icon" type="image/png" href="resources/images/icon.png">
 
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div class="navigation">
-        <a data-bind="click: changeNavigation('Town')">Town</a>
-        <a data-bind="click: changeNavigation('Adventure')">Adventure</a>
-        <a data-bind="click: changeNavigation('Dungeons')">Dungeons</a>
-        <a data-bind="click: changeNavigation('Market')">Market</a>
-        <a data-bind="click: changeNavigation('Options')">Options</a>
+    <div data-bind="style: { display: 'none' }">
+        <img class="loading-spinner" src="resources/images/loading.gif" alt="LOADING">
     </div>
-    <div class="player-div">
-        <table class="player-table">
-            <tr>
-                <td colspan="3">
-                    <img class="center" src="resources/images/Warrior.png" alt="Warrior" height="96" width="96">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" class="text-center" data-bind="text: player.health"></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <progress class="healthbar" data-bind="attr: { max: player.maxHealth, value: player.currentHealth }"></progress>
-                </td>
-            </tr>
-            <tr>
-                <td>Stamina</td>
-                <td data-bind="text: player.stamina" />
-                <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.stamina, 1); }, visible: player.statPoints() > 0">+</button></td>
-            </tr>
-            <tr>
-                <td>Strength</td>
-                <td data-bind="text: player.strength" />
-                <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.strength, 1); }, visible: player.statPoints() > 0">+</button></td>
-            </tr>
-            <tr>
-                <td>Level</td>
-                <td data-bind="text: player.level" />
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="3" class="text-center" data-bind="text: player.exp"></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <progress class="expbar" data-bind="attr: { max: player.requiredExp, value: player.currentExp }"></progress>
-                </td>
-            </tr>
-        </table>
-        <table class="player-table">
+    <div style="display: none;" data-bind="style: { display: 'block' }">
+        <div class="navigation">
+            <a data-bind="click: changeNavigation('Town')">Town</a>
+            <a data-bind="click: changeNavigation('Adventure')">Adventure</a>
+            <a data-bind="click: changeNavigation('Dungeons')">Dungeons</a>
+            <a data-bind="click: changeNavigation('Market')">Market</a>
+            <a data-bind="click: changeNavigation('Options')">Options</a>
+        </div>
+        <div class="player-div">
+            <table class="player-table">
                 <tr>
-                    <td>Gold</td>
-                    <td>
-                        <p style="margin: 0; float: left;" data-bind="text: player.gold"></p>
-                        <img class="icon-img icon-currency" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
+                    <td colspan="3">
+                        <img class="center" src="resources/images/Warrior.png" alt="Warrior" height="96" width="96">
                     </td>
                 </tr>
                 <tr>
-                    <td>Wood</td>
-                    <td>
-                        <p style="margin: 0; float: left;" data-bind="text: player.wood"></p>
-                        <img class="icon-img icon-currency" src="resources/images/currency/wood.png" alt="wood"/>
+                    <td colspan="3" class="text-center" data-bind="text: player.health"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <progress class="healthbar" data-bind="attr: { max: player.maxHealth, value: player.currentHealth }"></progress>
                     </td>
                 </tr>
                 <tr>
-                    <td>Stone</td>
-                    <td>
-                        <p style="margin: 0; float: left;" data-bind="text: player.stone"></p>
-                        <img class="icon-img icon-currency" src="resources/images/currency/stone.png" alt="stone"/>
-                    </td>
+                    <td>Stamina</td>
+                    <td data-bind="text: player.stamina" />
+                    <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.stamina, 1); }, visible: player.statPoints() > 0">+</button></td>
                 </tr>
                 <tr>
-                    <td>Iron</td>
-                    <td>
-                        <p style="margin: 0; float: left;" data-bind="text: player.iron"></p>
-                        <img style="margin-left: 2px;" class="icon-img icon-currency" src="resources/images/currency/iron.png" alt="iron"/>
+                    <td>Strength</td>
+                    <td data-bind="text: player.strength" />
+                    <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.strength, 1); }, visible: player.statPoints() > 0">+</button></td>
+                </tr>
+                <tr>
+                    <td>Level</td>
+                    <td data-bind="text: player.level" />
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-center" data-bind="text: player.exp"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <progress class="expbar" data-bind="attr: { max: player.requiredExp, value: player.currentExp }"></progress>
                     </td>
                 </tr>
-        </table>
-    </div>
-    
-    <div class="main-div town-div" data-bind="visible: isNavigation('Town')">
-        <button data-bind="visible: player.isDead(), click: player.revive()">Revive</button>
-        <!-- ko foreach: $Buildings -->
-        <div class="building-card">
-            <div class="card-image-container">
-                <div class="building-card-locked" data-bind="visible: !$data.owned()">
-                    <button class="building-card-buy" data-bind="click: $data.buy">Buy</button>
-                    <div style="margin-top: 60%">
-                        <p class="building-card-cost" data-bind="text: 'Cost: ' + $data.cost"></p>
-                        <img class="icon-img" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
+            </table>
+            <table class="player-table">
+                    <tr>
+                        <td>Gold</td>
+                        <td>
+                            <p style="margin: 0; float: left;" data-bind="text: player.gold"></p>
+                            <img class="icon-img icon-currency" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Wood</td>
+                        <td>
+                            <p style="margin: 0; float: left;" data-bind="text: player.wood"></p>
+                            <img class="icon-img icon-currency" src="resources/images/currency/wood.png" alt="wood"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Stone</td>
+                        <td>
+                            <p style="margin: 0; float: left;" data-bind="text: player.stone"></p>
+                            <img class="icon-img icon-currency" src="resources/images/currency/stone.png" alt="stone"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Iron</td>
+                        <td>
+                            <p style="margin: 0; float: left;" data-bind="text: player.iron"></p>
+                            <img style="margin-left: 2px;" class="icon-img icon-currency" src="resources/images/currency/iron.png" alt="iron"/>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+        
+        <div class="main-div town-div" data-bind="visible: isNavigation('Town')">
+            <button data-bind="visible: player.isDead(), click: player.revive()">Revive</button>
+            <!-- ko foreach: $Buildings -->
+            <div class="building-card">
+                <div class="card-image-container">
+                    <div class="building-card-locked" data-bind="visible: !$data.owned()">
+                        <button class="building-card-buy" data-bind="click: $data.buy">Buy</button>
+                        <div style="margin-top: 60%">
+                            <p class="building-card-cost" data-bind="text: 'Cost: ' + $data.cost"></p>
+                            <img class="icon-img" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
+                        </div>
+                    </div>
+                    <img class="card-image" data-bind="attr: { src: $data.imageName }, click: $root.changeNavigation($data.name())" alt="pic">
+                </div>
+                <div class="card-container">
+                    <p style="text-align: center; font-weight: bold; margin: 10px 0" data-bind="text: $data.name"></p>
+                    <p style="margin: 10px 0 25px 0" data-bind="text: $data.description"></p>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+
+        <div class="main-div adventure-div" data-bind="visible: isNavigation('Adventure')">
+            <div class="navigation wide-nav">
+                <!-- ko foreach: $Adventures -->
+                <a data-bind="text: $data.name, click: function() { $root.startAdventure($data.name()) }"></a>
+                <!-- /ko -->
+            </div>
+            <div data-bind="with: currentAdventure, visible: currentAdventure">
+                <h1 class="text-center" data-bind="text: $data.name"></h1>
+                <h4 class="text-center" data-bind="text: 'Recommended Level: ' + $data.requiredLevel + ', Waves: ' + $data.waves"></h4>
+                <button class="button-xxl center" data-bind="click: $data.startFight, disable: $root.player.isDead()">Start</button>
+                <div data-bind="visible: $data.isFighting">
+                    <div>
+                        <button class="center margin-small" data-bind="click: $data.attack">Attack</button>
+                        <p style="width: 100%; text-align: center;" data-bind="text: 'Current Wave: ' + $data.currentWave()"></p>
+                    </div>
+                    <div class="center">
+                        <table class="monster-table">
+                            <tr>
+                                <td>Name</td>
+                                <td data-bind="text: $data.monster().name" />
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center" data-bind="text: $data.monster().health"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <progress class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Stamina</td>
+                                <td data-bind="text: $data.monster().stamina" />
+                            </tr>
+                            <tr>
+                                <td>Strength</td>
+                                <td data-bind="text: $data.monster().strength" />
+                            </tr>
+                            <tr>
+                                <td>Level</td>
+                                <td data-bind="text: $data.monster().level" />
+                            </tr>
+                        </table>
                     </div>
                 </div>
-                <img class="card-image" data-bind="attr: { src: $data.imageName }, click: $root.changeNavigation($data.name())" alt="pic">
-            </div>
-            <div class="card-container">
-                <p style="text-align: center; font-weight: bold; margin: 10px 0" data-bind="text: $data.name"></p>
-                <p style="margin: 10px 0 25px 0" data-bind="text: $data.description"></p>
             </div>
         </div>
-        <!-- /ko -->
-    </div>
 
-    <div class="main-div adventure-div" data-bind="visible: isNavigation('Adventure')">
-        <div class="navigation wide-nav">
-            <!-- ko foreach: $Adventures -->
-            <a data-bind="text: $data.name, click: function() { $root.startAdventure($data.name()) }"></a>
-            <!-- /ko -->
+        <div class="main-div dungeons-div" data-bind="visible: isNavigation('Dungeons')">
+            Dungeons
         </div>
-        <div data-bind="with: currentAdventure, visible: currentAdventure">
-            <h1 class="text-center" data-bind="text: $data.name"></h1>
-            <h4 class="text-center" data-bind="text: 'Recommended Level: ' + $data.requiredLevel + ', Waves: ' + $data.waves"></h4>
-            <button class="button-xxl center" data-bind="click: $data.startFight, disable: $root.player.isDead()">Start</button>
-            <div data-bind="visible: $data.isFighting">
-                <div>
-                    <button class="center margin-small" data-bind="click: $data.attack">Attack</button>
-                    <p style="width: 100%; text-align: center;" data-bind="text: 'Current Wave: ' + $data.currentWave()"></p>
-                </div>
-                <div class="center">
-                    <table class="monster-table">
-                        <tr>
-                            <td>Name</td>
-                            <td data-bind="text: $data.monster().name" />
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-center" data-bind="text: $data.monster().health"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <progress class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Stamina</td>
-                            <td data-bind="text: $data.monster().stamina" />
-                        </tr>
-                        <tr>
-                            <td>Strength</td>
-                            <td data-bind="text: $data.monster().strength" />
-                        </tr>
-                        <tr>
-                            <td>Level</td>
-                            <td data-bind="text: $data.monster().level" />
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="main-div dungeons-div" data-bind="visible: isNavigation('Dungeons')">
-        Dungeons
-    </div>
-
-    <div class="main-div market-div" data-bind="visible: isNavigation('Market')">
-        <h1 class="text-center">Sell</h1>
-        <table class="table-wide item-table">
-            <tr style="text-align: left">
-                <th style="width: 5%"></th>
-                <th style="width: 45%">Name</th>
-                <th style="width: 20%">Amount</th>
-                <th style="width: 10%"></th>
-                <th style="width: 20%"></th>
-            </tr>
-            <!-- ko foreach: player.backpack.items -->
-            <tr>
-                <td><img class="icon-img" data-bind="attr: { src: $data.item.iconSource, title: $data.item.itemType }"/></td>
-                <td data-bind="text: $data.item.name"></td>
-                <td class="text-center" data-bind="text: $data.amount"></td>
-                <td>
-                    <p style="margin: 0; float: left;" data-bind="text: $data.item.goldValue"></p>
-                    <img class="icon-img" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
-                </td>
-                <td>
-                    <button data-bind="click: function() { $root.player.sell($data.item, 1) }">Sell</button>
-                </td>
-            </tr>
-            <!-- /ko -->
-        </table>
-        <h1 class="text-center">Buy</h1>
-        <table class="table-wide item-table">
-            
-        </table>
-    </div>
-
-    <div class="main-div townhall-div" data-bind="visible: isNavigation('Townhall')">
-        <div class="navigation wide-nav">
-            <a data-bind="click: function() { $root.changeNavigation('', 'Quests'); }">Quests</a>
-            <a data-bind="click: function() { $root.changeNavigation('', 'Townsmen'); }">Townsmen</a>
-        </div>
-        <div data-bind="visible: isNavigation('Townhall', 'Quests')">
-            <ul class="quest-list">
-                <!-- ko foreach: player.quests -->
-                <li data-bind="text: $data.name + ' - ' + $data.description"></li>
+        <div class="main-div market-div" data-bind="visible: isNavigation('Market')">
+            <h1 class="text-center">Sell</h1>
+            <table class="table-wide item-table">
+                <tr style="text-align: left">
+                    <th style="width: 5%"></th>
+                    <th style="width: 45%">Name</th>
+                    <th style="width: 20%">Amount</th>
+                    <th style="width: 10%"></th>
+                    <th style="width: 20%"></th>
+                </tr>
+                <!-- ko foreach: player.backpack.items -->
+                <tr>
+                    <td><img class="icon-img" data-bind="attr: { src: $data.item.iconSource, title: $data.item.itemType }"/></td>
+                    <td data-bind="text: $data.item.name"></td>
+                    <td class="text-center" data-bind="text: $data.amount"></td>
+                    <td>
+                        <p style="margin: 0; float: left;" data-bind="text: $data.item.goldValue"></p>
+                        <img class="icon-img" src="resources/images/currency/goldcoin.png" alt="goldcoin"/>
+                    </td>
+                    <td>
+                        <button data-bind="click: function() { $root.player.sell($data.item, 1) }">Sell</button>
+                    </td>
+                </tr>
                 <!-- /ko -->
-            </ul>
+            </table>
+            <h1 class="text-center">Buy</h1>
+            <table class="table-wide item-table">
+                
+            </table>
         </div>
-        <div data-bind="visible: isNavigation('Townhall', 'Townsmen')">
-            Townsmen
+
+        <div class="main-div townhall-div" data-bind="visible: isNavigation('Townhall')">
+            <div class="navigation wide-nav">
+                <a data-bind="click: function() { $root.changeNavigation('', 'Quests'); }">Quests</a>
+                <a data-bind="click: function() { $root.changeNavigation('', 'Apprentice'); }">Apprentice</a>
+            </div>
+            <div data-bind="visible: isNavigation('Townhall', 'Quests')">
+                <ul class="quest-list">
+                    <!-- ko foreach: player.quests -->
+                    <li data-bind="click: function() { $root.startQuest($data); }">
+                        <h2 data-bind="text: $data.name + '(' + $data.difficulty + ')'"></h2>
+                        <p data-bind="text: $data.description"></p>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+            <div data-bind="visible: isNavigation('Townhall', 'Quests') && currentQuest, with: currentQuest">
+                <p data-bind="text: $data.name"></p>
+                <p data-bind="text: $data.requirements.strength"></p>
+                <p data-bind="text: $data.requirements.stamina"></p>
+                <p data-bind="text: $data.requirements.speed"></p>
+                <p data-bind="text: $data.requirements.knowledge"></p>
+                <p data-bind="text: 'Duration: ' + $data.duration() + 's'"></p>
+            </div>
+            <div data-bind="visible: isNavigation('Townhall', 'Apprentice')">
+                Apprentice
+            </div>
         </div>
+            
+        <!-- <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
+                Optins
+        </div>
+            
+        <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
+                Optins
+        </div>
+            
+        <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
+                Optins
+        </div> -->
     </div>
-        
-    <!-- <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
-            Optins
-    </div>
-        
-    <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
-            Optins
-    </div>
-        
-    <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
-            Optins
-    </div> -->
-        
     
 
     <!-- Scripts -->
