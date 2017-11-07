@@ -44,7 +44,7 @@ define(["require", "exports", "./QuestDifficulty", "knockout"], function (requir
         Quest.prototype.calcDuration = function () {
             // TODO: Replace with apprentice
             var diff = this.requirements.speed() - 5;
-            return Math.floor(diff * (15 * Math.log(Math.pow(10 + diff, 2))));
+            return Math.floor(5 * (15 * Math.log(Math.pow(10 + diff, 2))));
         };
         return Quest;
     }());
