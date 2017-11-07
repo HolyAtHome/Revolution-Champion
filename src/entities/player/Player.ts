@@ -1,8 +1,9 @@
-import { Backpack } from './features/Backpack';
 import * as ko from 'knockout';
 import { Entity } from './../Entity';
 import { Monster } from './../Monster';
 import { Item } from './../../items/Item';
+import { Backpack } from './features/Backpack';
+import { Quest } from './../../quests/Quest';
 import { Interval } from './../../util/Interval';
 
 export class Player extends Entity {
@@ -17,6 +18,8 @@ export class Player extends Entity {
     iron: KnockoutObservable<number>;
 
     backpack: Backpack;
+
+    quests: KnockoutObservableArray<Quest>;
 
     statPoints: KnockoutObservable<number>;
 
@@ -38,6 +41,12 @@ export class Player extends Entity {
         this.iron = ko.observable(0);
 
         this.backpack = new Backpack();
+
+        this.quests = ko.observableArray([
+            new Quest('Killing Monster', 'Kill some Monsters'),
+            new Quest('Help a Person', 'Someone is in need of help'),
+            new Quest('Collect Apples', 'We are hungry!')
+        ]);
 
         this.statPoints = ko.observable(0);
 

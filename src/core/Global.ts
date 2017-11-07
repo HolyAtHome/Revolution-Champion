@@ -7,6 +7,7 @@ import { BuildingContainer } from './../buildings/BuildingContainer';
 
 export class Global {
     static $Navigation: KnockoutObservable<String>;
+    static $SubNavigation: KnockoutObservable<String>;
     
     static $Items: ItemCollectionContainer;
 
@@ -28,6 +29,7 @@ export class Global {
 
     static $Init(): void {
         this.$Navigation = ko.observable('');
+        this.$SubNavigation = ko.observable('');
         this.$Items = new ItemCollectionContainer();
         this.$Player = new Player();
         this.$MonsterNames =

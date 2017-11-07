@@ -164,10 +164,11 @@ button:active {
     font-weight: bold;
 }
 
-.adventure-nav { background-color: rgb(148, 97, 50); display: flex; }
-.adventure-nav a { flex-basis: 100%; font-size: 12px;}
-.adventure-nav a:disabled { cursor: not-allowed; }
-.adventure-nav a:hover { background-color: rgb(175, 113, 58); color: white; }
+.wide-nav { background-color: rgb(148, 97, 50); display: flex;}
+.wide-nav a { flex-basis: 100%; font-size: 12px; border-right: 1px solid rgb(83, 54, 28); }
+.wide-nav a:last-child { border-right: none; }
+.wide-nav a:disabled { cursor: not-allowed; }
+.wide-nav a:hover { background-color: rgb(175, 113, 58); color: white; }
 
 .healthbar {
     -webkit-appearance: none;
@@ -229,3 +230,13 @@ button:active {
 }
 
 .button-increase:hover { cursor: pointer; }
+
+.quest-list li { list-style: none; line-height: 20px; }
+.quest-list li:before {
+    content: '';
+    display: inline-block;
+    background-image: url('../resources/images/quest.png');
+    background-size: contain;
+    width: 16px;
+    height: 16px;
+}

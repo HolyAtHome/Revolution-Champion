@@ -13,6 +13,7 @@ define(["require", "exports", "knockout", "./../entities/player/Player", "../ite
         };
         Global.$Init = function () {
             this.$Navigation = ko.observable('');
+            this.$SubNavigation = ko.observable('');
             this.$Items = new ItemCollectionContainer_1.ItemCollectionContainer();
             this.$Player = new Player_1.Player();
             this.$MonsterNames =

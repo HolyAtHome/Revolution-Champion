@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "./features/Backpack", "knockout", "./../Entity", "./../../util/Interval"], function (require, exports, Backpack_1, ko, Entity_1, Interval_1) {
+define(["require", "exports", "knockout", "./../Entity", "./features/Backpack", "./../../quests/Quest", "./../../util/Interval"], function (require, exports, ko, Entity_1, Backpack_1, Quest_1, Interval_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Player = /** @class */ (function (_super) {
@@ -26,6 +26,11 @@ define(["require", "exports", "./features/Backpack", "knockout", "./../Entity", 
             _this.stone = ko.observable(0);
             _this.iron = ko.observable(0);
             _this.backpack = new Backpack_1.Backpack();
+            _this.quests = ko.observableArray([
+                new Quest_1.Quest('Killing Monster', 'Kill some Monsters'),
+                new Quest_1.Quest('Help a Person', 'Someone is in need of help'),
+                new Quest_1.Quest('Collect Apples', 'We are hungry!')
+            ]);
             _this.statPoints = ko.observable(0);
             _this.isFighting = ko.observable(false);
             _this.level.subscribe(function () { return _this.onLevelUp(); });

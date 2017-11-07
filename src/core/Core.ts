@@ -10,6 +10,8 @@ class Core {
     $Buildings: KnockoutObservableArray<Building>;
 
     navigation: KnockoutObservable<String>;
+    subNavigation: KnockoutObservable<String>;
+
     player: Player;
     currentAdventure: KnockoutObservable<Adventure>;
 
@@ -18,6 +20,8 @@ class Core {
         this.$Buildings = Global.$Buildings.all();
 
         this.navigation = Global.$Navigation;
+        this.subNavigation = Global.$SubNavigation;
+
         this.player = Global.$Player;
         this.currentAdventure = ko.observable(undefined);
 
@@ -29,12 +33,19 @@ class Core {
         this.player.backpack.addItems(Global.$Items.junk.getRandom(3));
     }
 
-    isNavigation(nav: String) : boolean {
-         return this.navigation() === nav;
+    isNavigation(nav: String, subNav: String = '') : boolean {
+        if(subNav === '') {
+            return this.navigation() === nav;
+        } else {
+            return (this.navigation() === nav && this.subNavigation() === subNav);
+        }
     };
 
-    changeNavigation(newNav: String) : void {
-        this.navigation(newNav);
+    changeNavigation(newNav: String, newSubNav: String = '') : void {
+        if(newNav != '') {
+            this.navigation(newNav);
+        }
+        this.subNavigation(newSubNav);
     }
 
     startAdventure(adv: String) {

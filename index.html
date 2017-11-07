@@ -116,7 +116,7 @@
     </div>
 
     <div class="main-div adventure-div" data-bind="visible: isNavigation('Adventure')">
-        <div class="navigation adventure-nav">
+        <div class="navigation wide-nav">
             <!-- ko foreach: $Adventures -->
             <a data-bind="text: $data.name, click: function() { $root.startAdventure($data.name()) }"></a>
             <!-- /ko -->
@@ -198,7 +198,20 @@
     </div>
 
     <div class="main-div townhall-div" data-bind="visible: isNavigation('Townhall')">
-            Welcome to the Townhall
+        <div class="navigation wide-nav">
+            <a data-bind="click: function() { $root.changeNavigation('', 'Quests'); }">Quests</a>
+            <a data-bind="click: function() { $root.changeNavigation('', 'Townsmen'); }">Townsmen</a>
+        </div>
+        <div data-bind="visible: isNavigation('Townhall', 'Quests')">
+            <ul class="quest-list">
+                <!-- ko foreach: player.quests -->
+                <li data-bind="text: $data.name + ' - ' + $data.description"></li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <div data-bind="visible: isNavigation('Townhall', 'Townsmen')">
+            Townsmen
+        </div>
     </div>
         
     <!-- <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
@@ -220,7 +233,7 @@
     <script src="./built/require-config.js"></script>
     <script>
         require(["./built/core/core"]);
-        </script>
+    </script>
 </body>
 
 </html>
