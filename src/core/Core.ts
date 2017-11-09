@@ -1,3 +1,4 @@
+import { Apprentice } from './../entities/Apprentice';
 import { Quest } from './../quests/Quest';
 import * as ko from 'knockout';
 import { Global } from './Global';
@@ -15,6 +16,8 @@ class Core {
 
     player: Player;
     currentAdventure: KnockoutObservable<Adventure>;
+
+    apprentice: Apprentice;
     currentQuest: KnockoutObservable<Quest>
 
     constructor(startNav: String) {
@@ -26,6 +29,8 @@ class Core {
 
         this.player = Global.$Player;
         this.currentAdventure = ko.observable(undefined);
+
+        this.apprentice = Global.$Apprentice;
         this.currentQuest = ko.observable(undefined);
 
         this.navigation(startNav);

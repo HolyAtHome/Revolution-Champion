@@ -9,6 +9,7 @@ define(["require", "exports", "knockout", "./Global"], function (require, export
             this.subNavigation = Global_1.Global.$SubNavigation;
             this.player = Global_1.Global.$Player;
             this.currentAdventure = ko.observable(undefined);
+            this.apprentice = Global_1.Global.$Apprentice;
             this.currentQuest = ko.observable(undefined);
             this.navigation(startNav);
             console.log('Starting with Navigation "' + this.navigation() + '"');

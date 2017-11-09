@@ -1,3 +1,4 @@
+import { Apprentice } from './../entities/Apprentice';
 import * as ko from 'knockout';
 import { Player } from './../entities/player/Player';
 import { Adventure } from './../adventures/Adventure';
@@ -12,6 +13,7 @@ export class Global {
     static $Items: ItemCollectionContainer;
 
     static $Player: Player;
+    static $Apprentice: Apprentice;
 
     static $MonsterNames: Array<String>;
 
@@ -32,6 +34,7 @@ export class Global {
         this.$SubNavigation = ko.observable('');
         this.$Items = new ItemCollectionContainer();
         this.$Player = new Player();
+        this.$Apprentice = new Apprentice();
         this.$MonsterNames =
             ['Goblin', 'Birdperson', 'Evil Hound', 'Witch', 'Warlock', 'Undead Mage', 'Zombie'];
         this.$Adventures = new AdventureContainer();

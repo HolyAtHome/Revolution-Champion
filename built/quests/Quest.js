@@ -1,4 +1,4 @@
-define(["require", "exports", "./QuestDifficulty", "knockout"], function (require, exports, QuestDifficulty_1, ko) {
+define(["require", "exports", "./../core/Global", "./QuestDifficulty", "knockout"], function (require, exports, Global_1, QuestDifficulty_1, ko) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Quest = /** @class */ (function () {
@@ -9,6 +9,7 @@ define(["require", "exports", "./QuestDifficulty", "knockout"], function (requir
             this.difficulty = diff;
             this.requirements = this.createRequirements(this.difficulty);
             this.duration = ko.computed(function () { return _this.calcDuration(); });
+            this.apprentice = Global_1.Global.$Apprentice;
         }
         Quest.prototype.createRequirements = function (d) {
             var req;
@@ -42,8 +43,7 @@ define(["require", "exports", "./QuestDifficulty", "knockout"], function (requir
             return req;
         };
         Quest.prototype.calcDuration = function () {
-            // TODO: Replace with apprentice
-            var diff = this.requirements.speed() - 5;
+            var diff = this.requirements.speed() - this.apprentice.speed();
             return Math.floor(5 * (15 * Math.log(Math.pow(10 + diff, 2))));
         };
         return Quest;

@@ -1,3 +1,5 @@
+import { Global } from './../core/Global';
+import { Apprentice } from './../entities/Apprentice';
 import { QuestRequirements } from './QuestRequirements';
 import { QuestDifficulty } from './QuestDifficulty';
 import * as ko from 'knockout';
@@ -11,8 +13,7 @@ export class Quest {
     requirements: QuestRequirements;
     duration: KnockoutComputed<number>;
 
-    // TODO: Create Apprentice Class (extends Entity)
-    apprentice: any;
+    apprentice: Apprentice;
 
     constructor(name: String, desc: String, diff: QuestDifficulty) {
         this.name = name;
@@ -20,6 +21,7 @@ export class Quest {
         this.difficulty = diff;
         this.requirements = this.createRequirements(this.difficulty);
         this.duration = ko.computed(() => this.calcDuration());
+        this.apprentice = Global.$Apprentice;
     }
 
     private createRequirements(d: QuestDifficulty): QuestRequirements {
@@ -53,8 +55,7 @@ export class Quest {
     }
 
     private calcDuration(): number {
-        // TODO: Replace with apprentice
-        var diff = this.requirements.speed() - 5
+        var diff = this.requirements.speed() - this.apprentice.speed();
         return Math.floor(5 * (15 * Math.log(Math.pow(10+diff, 2))));
     }
 

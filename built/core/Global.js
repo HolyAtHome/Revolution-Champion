@@ -1,4 +1,4 @@
-define(["require", "exports", "knockout", "./../entities/player/Player", "../items/collections/ItemCollectionContainer", "./../adventures/AdventureContainer", "./../buildings/BuildingContainer"], function (require, exports, ko, Player_1, ItemCollectionContainer_1, AdventureContainer_1, BuildingContainer_1) {
+define(["require", "exports", "./../entities/Apprentice", "knockout", "./../entities/player/Player", "../items/collections/ItemCollectionContainer", "./../adventures/AdventureContainer", "./../buildings/BuildingContainer"], function (require, exports, Apprentice_1, ko, Player_1, ItemCollectionContainer_1, AdventureContainer_1, BuildingContainer_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Global = /** @class */ (function () {
@@ -16,6 +16,7 @@ define(["require", "exports", "knockout", "./../entities/player/Player", "../ite
             this.$SubNavigation = ko.observable('');
             this.$Items = new ItemCollectionContainer_1.ItemCollectionContainer();
             this.$Player = new Player_1.Player();
+            this.$Apprentice = new Apprentice_1.Apprentice();
             this.$MonsterNames =
                 ['Goblin', 'Birdperson', 'Evil Hound', 'Witch', 'Warlock', 'Undead Mage', 'Zombie'];
             this.$Adventures = new AdventureContainer_1.AdventureContainer();
