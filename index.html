@@ -224,7 +224,12 @@
                 <p data-bind="text: $data.requirements.stamina"></p>
                 <p data-bind="text: $data.requirements.speed"></p>
                 <p data-bind="text: $data.requirements.knowledge"></p>
+                <p data-bind="text: 'Success Chance: ' + $data.success() + '%'"></p>
                 <p data-bind="text: 'Duration: ' + $data.duration() + 's'"></p>
+                <button class="button-xxl" data-bind="click: $data.startQuest">Start</button>
+                
+                <p data-bind="text: 'Remaining: ' + ($data.maxProgress() - $data.currentProgress())"></p>
+                <progress data-bind="visible: $data.currentProgress() != null, attr: { max: $data.maxProgress, value: $data.currentProgress }"></progress>
             </div>
             <div data-bind="visible: isNavigation('Townhall', 'Apprentice')">
                 Apprentice

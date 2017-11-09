@@ -15,8 +15,8 @@ define(["require", "exports", "./../entities/Apprentice", "knockout", "./../enti
             this.$Navigation = ko.observable('');
             this.$SubNavigation = ko.observable('');
             this.$Items = new ItemCollectionContainer_1.ItemCollectionContainer();
-            this.$Player = new Player_1.Player();
             this.$Apprentice = new Apprentice_1.Apprentice();
+            this.$Player = new Player_1.Player();
             this.$MonsterNames =
                 ['Goblin', 'Birdperson', 'Evil Hound', 'Witch', 'Warlock', 'Undead Mage', 'Zombie'];
             this.$Adventures = new AdventureContainer_1.AdventureContainer();

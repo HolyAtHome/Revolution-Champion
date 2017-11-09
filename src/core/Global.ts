@@ -33,8 +33,8 @@ export class Global {
         this.$Navigation = ko.observable('');
         this.$SubNavigation = ko.observable('');
         this.$Items = new ItemCollectionContainer();
-        this.$Player = new Player();
         this.$Apprentice = new Apprentice();
+        this.$Player = new Player();
         this.$MonsterNames =
             ['Goblin', 'Birdperson', 'Evil Hound', 'Witch', 'Warlock', 'Undead Mage', 'Zombie'];
         this.$Adventures = new AdventureContainer();
