@@ -38,7 +38,7 @@
                 <tr>
                     <td colspan="3" class="text-center" data-bind="text: player.health"></td>
                 </tr>
-                <tr>
+                <tr style="line-height: 0">
                     <td colspan="3">
                         <progress class="healthbar" data-bind="attr: { max: player.maxHealth, value: player.currentHealth }"></progress>
                     </td>
@@ -61,7 +61,7 @@
                 <tr>
                     <td colspan="3" class="text-center" data-bind="text: player.exp"></td>
                 </tr>
-                <tr>
+                <tr style="line-height: 0">
                     <td colspan="3">
                         <progress class="expbar" data-bind="attr: { max: player.requiredExp, value: player.currentExp }"></progress>
                     </td>
@@ -137,32 +137,11 @@
                         <p style="width: 100%; text-align: center;" data-bind="text: 'Current Wave: ' + $data.currentWave()"></p>
                     </div>
                     <div class="center">
-                        <table class="monster-table">
-                            <tr>
-                                <td>Name</td>
-                                <td data-bind="text: $data.monster().name" />
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="text-center" data-bind="text: $data.monster().health"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <progress class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Stamina</td>
-                                <td data-bind="text: $data.monster().stamina" />
-                            </tr>
-                            <tr>
-                                <td>Strength</td>
-                                <td data-bind="text: $data.monster().strength" />
-                            </tr>
-                            <tr>
-                                <td>Level</td>
-                                <td data-bind="text: $data.monster().level" />
-                            </tr>
-                        </table>
+                        <div class="monster-div">
+                            <h2 data-bind="text: $data.monster().name() + ' (Level ' + $data.monster().level() + ')'"></h2>
+                            <p style="margin-bottom: -8px;" data-bind="text: $data.monster().health"></p>
+                            <progress style="width: 25%" class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -236,10 +215,11 @@
             </div>
         </div>
             
-        <!-- <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
-                Optins
+        <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
+            <h1>Options :)</h1>
+            <button data-bind="click: testOutputJson">Output JSON</button>
         </div>
-            
+        <!--    
         <div class="main-div options-div" data-bind="visible: isNavigation('Options')">
                 Optins
         </div>

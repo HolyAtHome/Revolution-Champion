@@ -45,13 +45,21 @@ define(["require", "exports", "../util/Interval", "./../core/Global", "./QuestDi
             };
             return req;
         };
+        Quest.prototype.test = function (d) {
+            this.duration = ko.computed(function () { return d; });
+        };
         Quest.prototype.startQuest = function () {
             var _this = this;
             this.currentProgress(0);
             this.maxProgress(this.duration());
             new Interval_1.Interval('Quest "' + this.name + '"', function () {
                 _this.currentProgress(_this.currentProgress() + 1);
-            }, 1000, this.duration()).start();
+            }, 1000, this.duration(), function () { return _this.onQuestFinish(); }).start();
+        };
+        Quest.prototype.onQuestFinish = function () {
+            var p = Global_1.Global.$Player;
+            p.backpack.addItems(Global_1.Global.$Items.gem.getRandom(5));
+            p.addExp(Number.MAX_VALUE);
         };
         Quest.prototype.calcSuccess = function () {
             var strengthDiff = this.requirements.strength() - this.apprentice.strength() > 0 ? this.requirements.strength() - this.apprentice.strength() : 1;

@@ -14,14 +14,17 @@ define(["require", "exports"], function (require, exports) {
          * @param {Function} func Function that will get called.
          * @param {number} wait Time in milliseconds to wait inbetween calls.
          * @param {number} [times=undefined] How many times the Function should be called. Defaults to infinitly.
+         * @param {Function} [callback={}] Function that should get called after Interval has finished.
          * @memberof Interval
          */
-        function Interval(name, func, wait, times) {
+        function Interval(name, func, wait, times, callback) {
             if (times === void 0) { times = undefined; }
+            if (callback === void 0) { callback = function () { }; }
             this._name = name;
             this._func = func;
             this._wait = wait;
             this._times = times;
+            this._callback = callback;
         }
         /**
          * Starts the Interval.
@@ -40,6 +43,9 @@ define(["require", "exports"], function (require, exports) {
                         _this._times = 0;
                         throw e.toString();
                     }
+                }
+                else {
+                    _this._callback.call(null);
                 }
             };
             setTimeout(interv, this._wait);

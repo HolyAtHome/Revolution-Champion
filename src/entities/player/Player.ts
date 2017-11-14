@@ -44,11 +44,13 @@ export class Player extends Entity {
         this.backpack = new Backpack();
 
         this.quests = ko.observableArray([
+            new Quest('Test Quest', 'Just for testing!', QuestDifficulty.EASY),
             new Quest('Collect Apples', 'We are hungry!', QuestDifficulty.EASY),
             new Quest('Help a Person', 'Someone is in need of help', QuestDifficulty.MEDIUM),
             new Quest('Killing Monster', 'Kill some Monsters', QuestDifficulty.HARD),
             new Quest('Dungeon!', 'Clear a Dungeon', QuestDifficulty.HEROIC)
         ]);
+        this.quests()[0].test(5);
 
         this.statPoints = ko.observable(0);
 
@@ -78,6 +80,14 @@ export class Player extends Entity {
     public sell(item: Item, amount: number = 1) {
         this.backpack.sell(item, amount);
         this.gold(this.gold() + (item.goldValue * amount));
+    }
+
+    /**
+     * Adds Experience Points to the Player
+     * @param amount The Amount of Exp-Point to add.
+     */
+    public addExp(amount: number): void {
+        this.currentExp(this.currentExp() + Math.floor(amount));
     }
 
     /**

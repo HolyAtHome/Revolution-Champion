@@ -184,6 +184,10 @@ button:active {
 .wide-nav a:disabled { cursor: not-allowed; }
 .wide-nav a:hover { background-color: rgb(175, 113, 58); color: white; }
 
+.monster-div * {
+    position: relative;
+}
+
 .healthbar {
     -webkit-appearance: none;
     height: 10px;

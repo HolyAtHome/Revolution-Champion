@@ -40,6 +40,18 @@ define(["require", "exports", "knockout", "./Global"], function (require, export
         Core.prototype.startQuest = function (q) {
             this.currentQuest(q);
         };
+        Core.prototype.testOutputJson = function () {
+            console.log('--- Adventures ---');
+            console.log(JSON.stringify(this.$Adventures()));
+            console.log('--- Buildings ---');
+            console.log(JSON.stringify(this.$Buildings()));
+            console.log('--- Apprentice ---');
+            console.log(JSON.stringify(this.apprentice));
+            console.log('--- Player ---');
+            console.log(JSON.stringify(this.player.backpack.items()));
+            console.log('--- Navigation ---');
+            console.log(this.navigation(), '-', this.subNavigation());
+        };
         return Core;
     }());
     Global_1.Global.$Init();

@@ -64,6 +64,19 @@ class Core {
         this.currentQuest(q);
     }
 
+    testOutputJson(): void {
+        console.log('--- Adventures ---');
+        console.log(JSON.stringify(this.$Adventures()));
+        console.log('--- Buildings ---');
+        console.log(JSON.stringify(this.$Buildings()));
+        console.log('--- Apprentice ---');
+        console.log(JSON.stringify(this.apprentice));
+        console.log('--- Player ---');
+        console.log(JSON.stringify(this.player.backpack.items()));
+        console.log('--- Navigation ---');
+        console.log(this.navigation(), '-', this.subNavigation());
+    }
+
 }
 
 Global.$Init();

@@ -1,4 +1,4 @@
-define(["require", "exports", "./JunkItemCollection"], function (require, exports, JunkItemCollection_1) {
+define(["require", "exports", "./JunkItemCollection", "./GemItemCollection"], function (require, exports, JunkItemCollection_1, GemItemCollection_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -10,6 +10,7 @@ define(["require", "exports", "./JunkItemCollection"], function (require, export
     var ItemCollectionContainer = /** @class */ (function () {
         function ItemCollectionContainer() {
             this.junk = new JunkItemCollection_1.JunkItemCollection();
+            this.gem = new GemItemCollection_1.GemItemCollection();
         }
         return ItemCollectionContainer;
     }());

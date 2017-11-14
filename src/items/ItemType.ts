@@ -1,4 +1,7 @@
 export enum ItemType {
     Junk = 'Junk',
-    Crafting = 'Crafting'
+    Crafting = 'Crafting',
+    Gem = 'Gem',
+    Armor = 'Armor',
+    Weapon = 'Weapon'
 }

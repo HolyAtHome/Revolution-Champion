@@ -27,11 +27,13 @@ define(["require", "exports", "./../../quests/QuestDifficulty", "knockout", "./.
             _this.iron = ko.observable(0);
             _this.backpack = new Backpack_1.Backpack();
             _this.quests = ko.observableArray([
+                new Quest_1.Quest('Test Quest', 'Just for testing!', QuestDifficulty_1.QuestDifficulty.EASY),
                 new Quest_1.Quest('Collect Apples', 'We are hungry!', QuestDifficulty_1.QuestDifficulty.EASY),
                 new Quest_1.Quest('Help a Person', 'Someone is in need of help', QuestDifficulty_1.QuestDifficulty.MEDIUM),
                 new Quest_1.Quest('Killing Monster', 'Kill some Monsters', QuestDifficulty_1.QuestDifficulty.HARD),
                 new Quest_1.Quest('Dungeon!', 'Clear a Dungeon', QuestDifficulty_1.QuestDifficulty.HEROIC)
             ]);
+            _this.quests()[0].test(5);
             _this.statPoints = ko.observable(0);
             _this.isFighting = ko.observable(false);
             _this.level.subscribe(function () { return _this.onLevelUp(); });
@@ -57,6 +59,13 @@ define(["require", "exports", "./../../quests/QuestDifficulty", "knockout", "./.
             if (amount === void 0) { amount = 1; }
             this.backpack.sell(item, amount);
             this.gold(this.gold() + (item.goldValue * amount));
+        };
+        /**
+         * Adds Experience Points to the Player
+         * @param amount The Amount of Exp-Point to add.
+         */
+        Player.prototype.addExp = function (amount) {
+            this.currentExp(this.currentExp() + Math.floor(amount));
         };
         /**
          * Rewards Experience to the Player based on the Level of the Monster that was slain.

@@ -5,6 +5,9 @@ define(["require", "exports"], function (require, exports) {
     (function (ItemType) {
         ItemType["Junk"] = "Junk";
         ItemType["Crafting"] = "Crafting";
+        ItemType["Gem"] = "Gem";
+        ItemType["Armor"] = "Armor";
+        ItemType["Weapon"] = "Weapon";
     })(ItemType = exports.ItemType || (exports.ItemType = {}));
 });
 //# sourceMappingURL=ItemType.js.map

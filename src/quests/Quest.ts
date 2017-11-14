@@ -1,3 +1,4 @@
+import { Player } from './../entities/player/Player';
 import { Interval } from '../util/Interval';
 import { Global } from './../core/Global';
 import { Apprentice } from './../entities/Apprentice';
@@ -10,13 +11,13 @@ export class Quest {
     name: String;
     description: String;
     difficulty: QuestDifficulty;
+    factor: number;
 
     requirements: QuestRequirements;
     success: KnockoutComputed<number>;
     duration: KnockoutComputed<number>;
 
     apprentice: Apprentice;
-
     currentProgress: KnockoutObservable<number>;
     maxProgress: KnockoutObservable<number>;
 
@@ -24,8 +25,9 @@ export class Quest {
         this.name = name;
         this.description = desc;
         this.difficulty = diff;
+        this.factor = this.setFactor(this.difficulty);
         this.apprentice = Global.$Apprentice;
-        this.requirements = this.createRequirements(this.difficulty);
+        this.requirements = this.createRequirements();
         this.success = ko.computed(() => this.calcSuccess());
         this.duration = ko.computed(() => this.calcDuration());
 
@@ -33,26 +35,23 @@ export class Quest {
         this.maxProgress = ko.observable(null);
     }
 
-    private createRequirements(d: QuestDifficulty): QuestRequirements {
-        let req: QuestRequirements;
-        let factor: number;
-        switch (d) {
-            case QuestDifficulty.EASY: factor = 1;
-                break;
-            case QuestDifficulty.MEDIUM: factor = 2;
-                break;
-            case QuestDifficulty.HARD: factor = 3;
-                break;
-            case QuestDifficulty.HEROIC: factor = 5;
-                break;
-            default: 
-                break;
+    private setFactor(difficulty: QuestDifficulty): number {
+        switch (difficulty) {
+            case QuestDifficulty.EASY: return 1;
+            case QuestDifficulty.MEDIUM: return 2;
+            case QuestDifficulty.HARD: return 3;
+            case QuestDifficulty.HEROIC: return 5;
+            default: return -1;
         }
+    }
 
-        const strength = ko.observable(Math.floor(Math.random() * (((factor) + factor) - (factor) + 1) + factor*factor));
-        const stamina = ko.observable(Math.floor(Math.random() * (((factor) + factor) - (factor) + 1) + factor*factor));
-        const speed = ko.observable(Math.floor(Math.random() * (((factor) + factor) - (factor) + 1) + factor*factor));
-        const knowledge = ko.observable(Math.floor(Math.random() * (((factor) + factor) - (factor) + 1) + factor*factor));
+    private createRequirements(): QuestRequirements {
+        let req: QuestRequirements;
+
+        const strength = ko.observable(Math.floor(Math.random() * (((this.factor) + this.factor) - (this.factor) + 1) + this.factor*this.factor));
+        const stamina = ko.observable(Math.floor(Math.random() * (((this.factor) + this.factor) - (this.factor) + 1) + this.factor*this.factor));
+        const speed = ko.observable(Math.floor(Math.random() * (((this.factor) + this.factor) - (this.factor) + 1) + this.factor*this.factor));
+        const knowledge = ko.observable(Math.floor(Math.random() * (((this.factor) + this.factor) - (this.factor) + 1) + this.factor*this.factor));
 
         req = { 
             strength: strength,
@@ -63,12 +62,27 @@ export class Quest {
         return req;
     }
 
+    test(d: number) {
+        this.duration = ko.computed(() => { return d; });
+    }
+
     startQuest(): void {
         this.currentProgress(0);
         this.maxProgress(this.duration());
-        new Interval('Quest "' + this.name + '"', () => {
-            this.currentProgress(this.currentProgress() + 1);
-        }, 1000, this.duration()).start();
+        new Interval(
+            'Quest "' + this.name + '"', 
+            () => {
+                this.currentProgress(this.currentProgress() + 1);
+            }, 
+            1000, 
+            this.duration(), 
+            () => this.onQuestFinish()).start();
+    }
+
+    private onQuestFinish(): void {
+        let p = Global.$Player;
+        p.backpack.addItems(Global.$Items.gem.getRandom(5));
+        /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula.
     }
 
     private calcSuccess(): number {
