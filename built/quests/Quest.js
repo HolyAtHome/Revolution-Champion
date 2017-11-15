@@ -7,36 +7,29 @@ define(["require", "exports", "../util/Interval", "./../core/Global", "./QuestDi
             this.name = name;
             this.description = desc;
             this.difficulty = diff;
+            this.factor = this.setFactor(this.difficulty);
             this.apprentice = Global_1.Global.$Apprentice;
-            this.requirements = this.createRequirements(this.difficulty);
+            this.requirements = this.createRequirements();
             this.success = ko.computed(function () { return _this.calcSuccess(); });
             this.duration = ko.computed(function () { return _this.calcDuration(); });
             this.currentProgress = ko.observable(null);
             this.maxProgress = ko.observable(null);
         }
-        Quest.prototype.createRequirements = function (d) {
-            var req;
-            var factor;
-            switch (d) {
-                case QuestDifficulty_1.QuestDifficulty.EASY:
-                    factor = 1;
-                    break;
-                case QuestDifficulty_1.QuestDifficulty.MEDIUM:
-                    factor = 2;
-                    break;
-                case QuestDifficulty_1.QuestDifficulty.HARD:
-                    factor = 3;
-                    break;
-                case QuestDifficulty_1.QuestDifficulty.HEROIC:
-                    factor = 5;
-                    break;
-                default:
-                    break;
+        Quest.prototype.setFactor = function (difficulty) {
+            switch (difficulty) {
+                case QuestDifficulty_1.QuestDifficulty.EASY: return 1;
+                case QuestDifficulty_1.QuestDifficulty.MEDIUM: return 2;
+                case QuestDifficulty_1.QuestDifficulty.HARD: return 3;
+                case QuestDifficulty_1.QuestDifficulty.HEROIC: return 5;
+                default: return -1;
             }
-            var strength = ko.observable(Math.floor(Math.random() * (((factor) + factor) - (factor) + 1) + factor * factor));
-            var stamina = ko.observable(Math.floor(Math.random() * (((factor) + factor) - (factor) + 1) + factor * factor));
-            var speed = ko.observable(Math.floor(Math.random() * (((factor) + factor) - (factor) + 1) + factor * factor));
-            var knowledge = ko.observable(Math.floor(Math.random() * (((factor) + factor) - (factor) + 1) + factor * factor));
+        };
+        Quest.prototype.createRequirements = function () {
+            var req;
+            var strength = ko.observable(Math.floor(Math.random() * (((this.factor) + this.factor) - (this.factor) + 1) + this.factor * this.factor));
+            var stamina = ko.observable(Math.floor(Math.random() * (((this.factor) + this.factor) - (this.factor) + 1) + this.factor * this.factor));
+            var speed = ko.observable(Math.floor(Math.random() * (((this.factor) + this.factor) - (this.factor) + 1) + this.factor * this.factor));
+            var knowledge = ko.observable(Math.floor(Math.random() * (((this.factor) + this.factor) - (this.factor) + 1) + this.factor * this.factor));
             req = {
                 strength: strength,
                 stamina: stamina,
@@ -59,7 +52,7 @@ define(["require", "exports", "../util/Interval", "./../core/Global", "./QuestDi
         Quest.prototype.onQuestFinish = function () {
             var p = Global_1.Global.$Player;
             p.backpack.addItems(Global_1.Global.$Items.gem.getRandom(5));
-            p.addExp(Number.MAX_VALUE);
+            /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula. */
         };
         Quest.prototype.calcSuccess = function () {
             var strengthDiff = this.requirements.strength() - this.apprentice.strength() > 0 ? this.requirements.strength() - this.apprentice.strength() : 1;

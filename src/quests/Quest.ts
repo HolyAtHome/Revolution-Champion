@@ -82,7 +82,7 @@ export class Quest {
     private onQuestFinish(): void {
         let p = Global.$Player;
         p.backpack.addItems(Global.$Items.gem.getRandom(5));
-        /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula.
+        /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula. */
     }
 
     private calcSuccess(): number {
