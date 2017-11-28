@@ -1,4 +1,6 @@
 import { Item } from './../Item';
+import { IStackedItem } from '../IStackedItem';
+import { ItemStacker } from '../../util/ItemStacker';
 
 /**
  * Base Class for all Item Collections. Cannot be instanciated.
@@ -34,12 +36,13 @@ export abstract class ItemCollection {
      * @param {number} [amount=1] Amount of Items to return
      * @memberof ItemCollection
      */
-    public getRandom(amount: number = 1): Array<Item> {
-        let ret = new Array<Item>();
+    public getRandom(amount: number = 1): Array<IStackedItem> {
+        let stacker = new ItemStacker();
         for(let i = 0; i < amount; i++) {
-            ret.push(this.items[Math.floor(Math.random() * this.items.length)]);
+            let next = this.items[Math.floor(Math.random() * this.items.length)];
+            stacker.addItem(next);
         }
-        return ret;
+        return stacker.get();
     }
 
 }

@@ -71,17 +71,20 @@ export class Quest {
         this.maxProgress(this.duration());
         new Interval(
             'Quest "' + this.name + '"', 
-            () => {
-                this.currentProgress(this.currentProgress() + 1);
-            }, 
+            () => { this.currentProgress(this.currentProgress() + 1); }, 
             1000, 
             this.duration(), 
-            () => this.onQuestFinish()).start();
+            () => this.onQuestFinish()
+        ).start();
     }
 
     private onQuestFinish(): void {
         let p = Global.$Player;
-        p.backpack.addItems(Global.$Items.gem.getRandom(5));
+        let itemRewards = Global.$Items.gem.getRandom(3);
+        itemRewards.forEach(i => {
+            console.log('' + i.amount + 'x ' + i.item.name);
+        })
+        p.backpack.addItems(itemRewards);
         /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula. */
     }
 

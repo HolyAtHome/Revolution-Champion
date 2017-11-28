@@ -45,13 +45,15 @@ define(["require", "exports", "../util/Interval", "./../core/Global", "./QuestDi
             var _this = this;
             this.currentProgress(0);
             this.maxProgress(this.duration());
-            new Interval_1.Interval('Quest "' + this.name + '"', function () {
-                _this.currentProgress(_this.currentProgress() + 1);
-            }, 1000, this.duration(), function () { return _this.onQuestFinish(); }).start();
+            new Interval_1.Interval('Quest "' + this.name + '"', function () { _this.currentProgress(_this.currentProgress() + 1); }, 1000, this.duration(), function () { return _this.onQuestFinish(); }).start();
         };
         Quest.prototype.onQuestFinish = function () {
             var p = Global_1.Global.$Player;
-            p.backpack.addItems(Global_1.Global.$Items.gem.getRandom(5));
+            var itemRewards = Global_1.Global.$Items.gem.getRandom(3);
+            itemRewards.forEach(function (i) {
+                console.log('' + i.amount + 'x ' + i.item.name);
+            });
+            p.backpack.addItems(itemRewards);
             /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula. */
         };
         Quest.prototype.calcSuccess = function () {

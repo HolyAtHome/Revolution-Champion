@@ -1,7 +1,7 @@
-import { Apprentice } from './../entities/Apprentice';
 import * as ko from 'knockout';
 import { Player } from './../entities/player/Player';
 import { Adventure } from './../adventures/Adventure';
+import { Apprentice } from './../entities/Apprentice';
 import { ItemCollectionContainer } from '../items/collections/ItemCollectionContainer';
 import { AdventureContainer } from './../adventures/AdventureContainer';
 import { BuildingContainer } from './../buildings/BuildingContainer';

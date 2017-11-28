@@ -50,7 +50,7 @@ export class Player extends Entity {
             new Quest('Killing Monster', 'Kill some Monsters', QuestDifficulty.HARD),
             new Quest('Dungeon!', 'Clear a Dungeon', QuestDifficulty.HEROIC)
         ]);
-        this.quests()[0].test(5);
+        this.quests()[0].test(2);
 
         this.statPoints = ko.observable(0);
 

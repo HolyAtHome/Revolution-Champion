@@ -1,4 +1,4 @@
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", "../../util/ItemStacker"], function (require, exports, ItemStacker_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -26,11 +26,12 @@ define(["require", "exports"], function (require, exports) {
          */
         ItemCollection.prototype.getRandom = function (amount) {
             if (amount === void 0) { amount = 1; }
-            var ret = new Array();
+            var stacker = new ItemStacker_1.ItemStacker();
             for (var i = 0; i < amount; i++) {
-                ret.push(this.items[Math.floor(Math.random() * this.items.length)]);
+                var next = this.items[Math.floor(Math.random() * this.items.length)];
+                stacker.addItem(next);
             }
-            return ret;
+            return stacker.get();
         };
         return ItemCollection;
     }());

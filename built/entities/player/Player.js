@@ -33,7 +33,7 @@ define(["require", "exports", "./../../quests/QuestDifficulty", "knockout", "./.
                 new Quest_1.Quest('Killing Monster', 'Kill some Monsters', QuestDifficulty_1.QuestDifficulty.HARD),
                 new Quest_1.Quest('Dungeon!', 'Clear a Dungeon', QuestDifficulty_1.QuestDifficulty.HEROIC)
             ]);
-            _this.quests()[0].test(5);
+            _this.quests()[0].test(2);
             _this.statPoints = ko.observable(0);
             _this.isFighting = ko.observable(false);
             _this.level.subscribe(function () { return _this.onLevelUp(); });

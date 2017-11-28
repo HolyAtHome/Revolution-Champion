@@ -1,4 +1,4 @@
-define(["require", "exports", "./../entities/Apprentice", "knockout", "./../entities/player/Player", "../items/collections/ItemCollectionContainer", "./../adventures/AdventureContainer", "./../buildings/BuildingContainer"], function (require, exports, Apprentice_1, ko, Player_1, ItemCollectionContainer_1, AdventureContainer_1, BuildingContainer_1) {
+define(["require", "exports", "knockout", "./../entities/player/Player", "./../entities/Apprentice", "../items/collections/ItemCollectionContainer", "./../adventures/AdventureContainer", "./../buildings/BuildingContainer"], function (require, exports, ko, Player_1, Apprentice_1, ItemCollectionContainer_1, AdventureContainer_1, BuildingContainer_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Global = /** @class */ (function () {

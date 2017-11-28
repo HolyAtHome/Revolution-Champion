@@ -1,13 +1,13 @@
-import { Item } from '../items/Item';
 import * as ko from 'knockout';
 import { Global } from './../core/Global';
 import { Entity } from './Entity';
+import { IStackedItem } from '../items/IStackedItem';
 
 export class Monster extends Entity {
 
     name: KnockoutObservable<String>;
 
-    loot: Array<Item>;
+    loot: Array<IStackedItem>;
 
     constructor(minLvl: number, maxLvl: number) {
         super();
