@@ -21,6 +21,8 @@ export class Quest {
     currentProgress: KnockoutObservable<number>;
     maxProgress: KnockoutObservable<number>;
 
+    started: Boolean;
+
     constructor(name: String, desc: String, diff: QuestDifficulty) {
         this.name = name;
         this.description = desc;
@@ -33,6 +35,8 @@ export class Quest {
 
         this.currentProgress = ko.observable(null);
         this.maxProgress = ko.observable(null);
+
+        this.started = false;
     }
 
     private setFactor(difficulty: QuestDifficulty): number {
@@ -67,15 +71,18 @@ export class Quest {
     }
 
     startQuest(): void {
-        this.currentProgress(0);
-        this.maxProgress(this.duration());
-        new Interval(
-            'Quest "' + this.name + '"', 
-            () => { this.currentProgress(this.currentProgress() + 1); }, 
-            1000, 
-            this.duration(), 
-            () => this.onQuestFinish()
-        ).start();
+        if(!this.started) {
+            this.started = true;
+            this.currentProgress(0);
+            this.maxProgress(this.duration());
+            new Interval(
+                'Quest >' + this.name + '<', 
+                () => { this.currentProgress(this.currentProgress() + 1); }, 
+                1000, 
+                this.duration(), 
+                () => this.onQuestFinish()
+            ).start();
+        }
     }
 
     private onQuestFinish(): void {
@@ -86,6 +93,7 @@ export class Quest {
         })
         p.backpack.addItems(itemRewards);
         /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula. */
+        this.started = false;
     }
 
     private calcSuccess(): number {
@@ -98,7 +106,7 @@ export class Quest {
         const staminaChance = 1 / staminaDiff;
         const speedChance = 1 / speedDiff;
         const knowledgeChance = 1 / knowledgeDiff;
-
+        
         /* Multiply by 25 => (sum / traitCount) * 100 == sum * (100 / traitCount) */
         return Math.floor((strengthChance + staminaChance + speedChance + knowledgeChance) * 25);
     }

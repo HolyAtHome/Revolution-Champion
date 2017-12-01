@@ -14,4 +14,10 @@ export class Apprentice extends Entity {
         this.knowledge = ko.observable(1);
     }
 
+    lvlup(): void {
+        this.level(this.level() + 1);
+        this.strength(this.strength() + 2);
+        this.stamina(this.stamina() + 2);
+    }
+
 }

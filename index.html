@@ -198,20 +198,15 @@
                 </ul>
             </div>
             <div data-bind="visible: isNavigation('Townhall', 'Quests') && currentQuest, with: currentQuest">
-                <p data-bind="text: $data.name"></p>
-                <p data-bind="text: $data.requirements.strength"></p>
-                <p data-bind="text: $data.requirements.stamina"></p>
-                <p data-bind="text: $data.requirements.speed"></p>
-                <p data-bind="text: $data.requirements.knowledge"></p>
-                <p data-bind="text: 'Success Chance: ' + $data.success() + '%'"></p>
-                <p data-bind="text: 'Duration: ' + $data.duration() + 's'"></p>
+                <h2 data-bind="text: 'Success Chance: ' + $data.success() + '%'"></h2>
+                <h2 data-bind="text: 'Duration: ' + $data.duration() + 's'"></h2>
                 <button class="button-xxl" data-bind="click: $data.startQuest">Start</button>
                 
                 <p data-bind="text: 'Remaining: ' + ($data.maxProgress() - $data.currentProgress())"></p>
                 <progress data-bind="visible: $data.currentProgress() != null, attr: { max: $data.maxProgress, value: $data.currentProgress }"></progress>
             </div>
-            <div data-bind="visible: isNavigation('Townhall', 'Apprentice')">
-                Apprentice
+            <div data-bind="visible: isNavigation('Townhall', 'Apprentice'), with: apprentice">
+                <button class="button-xxl" data-bind="click: $data.lvlup">Level UP</button>
             </div>
         </div>
             

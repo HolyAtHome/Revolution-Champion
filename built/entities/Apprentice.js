@@ -21,6 +21,11 @@ define(["require", "exports", "knockout", "./Entity"], function (require, export
             _this.knowledge = ko.observable(1);
             return _this;
         }
+        Apprentice.prototype.lvlup = function () {
+            this.level(this.level() + 1);
+            this.strength(this.strength() + 2);
+            this.stamina(this.stamina() + 2);
+        };
         return Apprentice;
     }(Entity_1.Entity));
     exports.Apprentice = Apprentice;
