@@ -6,6 +6,8 @@ import { Interval } from './../util/Interval';
 import { Player } from '../entities/player/Player';
 import { Adventure } from './../adventures/Adventure';
 import { Building } from './../buildings/Building';
+import { UiEventManager } from './UiEventManager';
+import { UiEventFunction } from '../util/ui/UiEventFunction';
 
 class Core {
     $Adventures: KnockoutObservableArray<Adventure>;
