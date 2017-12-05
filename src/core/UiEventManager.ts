@@ -4,7 +4,8 @@ import { UiEventReturn } from '../util/ui/UiEventReturn';
 export enum UiEvent {
     OnQuestFinish = 'onQuestFinish',
     OnItemAddedToBackpack = 'onItemAddedToBackpack',
-    OnPlayerLevelUp = 'onPlayerLevelUp'
+    OnPlayerLevelUp = 'onPlayerLevelUp',
+    OnPlayerDeath = 'onPlayerDeath'
 }
 
 export class UiEventManager {
@@ -18,7 +19,8 @@ export class UiEventManager {
         this.eventSubscribers = {
             [UiEvent.OnQuestFinish]: new Array<UiEventFunction>(),
             [UiEvent.OnItemAddedToBackpack]: new Array<UiEventFunction>(),
-            [UiEvent.OnPlayerLevelUp]: new Array<UiEventFunction>()
+            [UiEvent.OnPlayerLevelUp]: new Array<UiEventFunction>(),
+            [UiEvent.OnPlayerDeath]: new Array<UiEventFunction>(),
         };
     }
 

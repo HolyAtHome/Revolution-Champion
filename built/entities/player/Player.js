@@ -124,6 +124,14 @@ define(["require", "exports", "./../../quests/QuestDifficulty", "knockout", "./.
             this.stamina(this.stamina() + 1);
             this.strength(this.strength() + 1);
         };
+        Player.prototype.isDead = function () {
+            var isDead = _super.prototype.isDead.call(this);
+            if (isDead) {
+                UiEventManager_1.UiEventManager.FireEvent(UiEventManager_1.UiEvent.OnPlayerDeath, this);
+                this.revive();
+            }
+            return isDead;
+        };
         /**
          * Used for Interval. Gets called every 3 seconds to regenerate 5HP
          * @private

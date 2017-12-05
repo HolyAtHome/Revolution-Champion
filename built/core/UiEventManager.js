@@ -6,6 +6,7 @@ define(["require", "exports"], function (require, exports) {
         UiEvent["OnQuestFinish"] = "onQuestFinish";
         UiEvent["OnItemAddedToBackpack"] = "onItemAddedToBackpack";
         UiEvent["OnPlayerLevelUp"] = "onPlayerLevelUp";
+        UiEvent["OnPlayerDeath"] = "onPlayerDeath";
     })(UiEvent = exports.UiEvent || (exports.UiEvent = {}));
     var UiEventManager = /** @class */ (function () {
         function UiEventManager() {
@@ -14,6 +15,7 @@ define(["require", "exports"], function (require, exports) {
                 _a[UiEvent.OnQuestFinish] = new Array(),
                 _a[UiEvent.OnItemAddedToBackpack] = new Array(),
                 _a[UiEvent.OnPlayerLevelUp] = new Array(),
+                _a[UiEvent.OnPlayerDeath] = new Array(),
                 _a);
             var _a;
         }

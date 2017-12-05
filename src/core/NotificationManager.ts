@@ -16,26 +16,29 @@ export class NotificationManager {
     
     private registerEvents(): void {
         UiEventManager.RegisterEvent(UiEvent.OnQuestFinish, { self: this, callback: this.onQuestFinish, unregisterAfter: false });
-        UiEventManager.RegisterEvent(UiEvent.OnPlayerLevelUp,  { self: this, callback: this.onPlayerLevelUp, unregisterAfter: false })
+        UiEventManager.RegisterEvent(UiEvent.OnPlayerLevelUp,  { self: this, callback: this.onPlayerLevelUp, unregisterAfter: false });
+        UiEventManager.RegisterEvent(UiEvent.OnPlayerDeath, { self: this, callback: this.onPlayerDeath, unregisterAfter: false });
     }
 
     private onQuestFinish(ret: UiEventReturn): void {
-        let self = ret.self;
-
-        self.class('show');
-        self.text('Quest "' + ret.parameter.name + '" just finished!');
-        self.resetNotification();
+        ret.self.notify('Quest "' + ret.parameter.name + '" just finished!');
     }
 
     private onPlayerLevelUp(ret: UiEventReturn): void {
-        let self = ret.self;
-
-        self.class('show');
-        self.text('Player leveled up to Level ' + ret.parameter + '!');
-        self.resetNotification();
+        ret.self.notify('You leveled up to Level ' + ret.parameter + '!');
     }
 
-    private resetNotification(): void {
+    private onPlayerDeath(ret: UiEventReturn): void {
+        ret.self.notify('You died!');
+    }
+
+    private notify(text: string): void {
+        this.class('show');
+        this.text(text);
+        this.startResetNotificationTimer();
+    }
+
+    private startResetNotificationTimer(): void {
         setTimeout(() => {
             this.class('');
             this.text('');

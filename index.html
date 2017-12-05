@@ -100,7 +100,6 @@
         </div>
         
         <div class="main-div town-div" data-bind="visible: isNavigation('Town')">
-            <button data-bind="visible: player.isDead(), click: player.revive()">Revive</button>
             <!-- ko foreach: $Buildings -->
             <div class="building-card">
                 <div class="card-image-container">
@@ -129,19 +128,15 @@
             </div>
             <div data-bind="with: currentAdventure, visible: currentAdventure">
                 <h1 class="text-center" data-bind="text: $data.name"></h1>
-                <h4 class="text-center" data-bind="text: 'Recommended Level: ' + $data.requiredLevel + ', Waves: ' + $data.waves"></h4>
-                <button class="button-xxl center" data-bind="click: $data.startFight, disable: $root.player.isDead()">Start</button>
-                <div data-bind="visible: $data.isFighting">
-                    <div>
-                        <button class="center margin-small" data-bind="click: $data.attack">Attack</button>
-                        <p style="width: 100%; text-align: center;" data-bind="text: 'Current Wave: ' + $data.currentWave()"></p>
-                    </div>
-                    <div class="center">
-                        <div class="monster-div">
-                            <h2 data-bind="text: $data.monster().name() + ' (Level ' + $data.monster().level() + ')'"></h2>
-                            <p style="margin-bottom: -8px;" data-bind="text: $data.monster().health"></p>
-                            <progress style="width: 25%" class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
-                        </div>
+                <h4 class="text-center" data-bind="text: 'Recommended Level: ' + $data.requiredLevel"></h4>
+                <div>
+                    <button class="center margin-small" data-bind="click: $data.attack">Attack</button>
+                </div>
+                <div class="center">
+                    <div class="monster-div">
+                        <h2 data-bind="text: $data.monster().name() + ' (Level ' + $data.monster().level() + ')'"></h2>
+                        <p style="margin-bottom: -8px;" data-bind="text: $data.monster().health"></p>
+                        <progress style="width: 25%" class="healthbar" data-bind="attr: { max: $data.monster().maxHealth, value: $data.monster().currentHealth }"></progress>
                     </div>
                 </div>
             </div>
@@ -164,7 +159,7 @@
                 <!-- ko foreach: player.backpack.items -->
                 <tr>
                     <td><img class="icon-img" data-bind="attr: { src: $data.item.iconSource, title: $data.item.itemType }"/></td>
-                    <td data-bind="text: $data.item.name"></td>
+                    <td data-bind="text: $data.item.name, attr: { title: $data.item.description }"></td>
                     <td class="text-center" data-bind="text: $data.amount"></td>
                     <td>
                         <p style="margin: 0; float: left;" data-bind="text: $data.item.goldValue"></p>

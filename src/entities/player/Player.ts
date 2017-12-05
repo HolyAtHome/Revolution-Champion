@@ -153,6 +153,15 @@ export class Player extends Entity {
         this.strength(this.strength() + 1);
     }
 
+    public isDead(): boolean {
+        const isDead = super.isDead();
+        if(isDead) {
+            UiEventManager.FireEvent(UiEvent.OnPlayerDeath, this);
+            this.revive();
+        }
+        return isDead;
+    }
+
     /**
      * Used for Interval. Gets called every 3 seconds to regenerate 5HP 
      * @private

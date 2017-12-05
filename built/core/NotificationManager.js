@@ -10,20 +10,23 @@ define(["require", "exports", "knockout", "./UiEventManager"], function (require
         NotificationManager.prototype.registerEvents = function () {
             UiEventManager_1.UiEventManager.RegisterEvent(UiEventManager_1.UiEvent.OnQuestFinish, { self: this, callback: this.onQuestFinish, unregisterAfter: false });
             UiEventManager_1.UiEventManager.RegisterEvent(UiEventManager_1.UiEvent.OnPlayerLevelUp, { self: this, callback: this.onPlayerLevelUp, unregisterAfter: false });
+            UiEventManager_1.UiEventManager.RegisterEvent(UiEventManager_1.UiEvent.OnPlayerDeath, { self: this, callback: this.onPlayerDeath, unregisterAfter: false });
         };
         NotificationManager.prototype.onQuestFinish = function (ret) {
-            var self = ret.self;
-            self.class('show');
-            self.text('Quest "' + ret.parameter.name + '" just finished!');
-            self.resetNotification();
+            ret.self.notify('Quest "' + ret.parameter.name + '" just finished!');
         };
         NotificationManager.prototype.onPlayerLevelUp = function (ret) {
-            var self = ret.self;
-            self.class('show');
-            self.text('Player leveled up to Level ' + ret.parameter + '!');
-            self.resetNotification();
+            ret.self.notify('You leveled up to Level ' + ret.parameter + '!');
         };
-        NotificationManager.prototype.resetNotification = function () {
+        NotificationManager.prototype.onPlayerDeath = function (ret) {
+            ret.self.notify('You died!');
+        };
+        NotificationManager.prototype.notify = function (text) {
+            this.class('show');
+            this.text(text);
+            this.startResetNotificationTimer();
+        };
+        NotificationManager.prototype.startResetNotificationTimer = function () {
             var _this = this;
             setTimeout(function () {
                 _this.class('');
