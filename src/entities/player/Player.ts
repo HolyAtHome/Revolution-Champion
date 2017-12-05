@@ -6,6 +6,7 @@ import { Item } from './../../items/Item';
 import { Backpack } from './features/Backpack';
 import { Quest } from './../../quests/Quest';
 import { Interval } from './../../util/Interval';
+import { UiEventManager, UiEvent } from '../../core/UiEventManager';
 
 export class Player extends Entity {
     
@@ -147,6 +148,7 @@ export class Player extends Entity {
      * @memberof Player
      */
     private onLevelUp(): void {
+        UiEventManager.FireEvent(UiEvent.OnPlayerLevelUp, this.level());
         this.stamina(this.stamina() + 1);
         this.strength(this.strength() + 1);
     }

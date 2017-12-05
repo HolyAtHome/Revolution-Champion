@@ -45,21 +45,18 @@ define(["require", "exports", "../util/Interval", "./../core/Global", "./QuestDi
         Quest.prototype.startQuest = function () {
             var _this = this;
             if (!this.started) {
-                UiEventManager_1.UiEventManager.RegisterEvent('onQuestFinish', { this: this, callback: this.onQuestFinish, unregisterAfter: true });
+                UiEventManager_1.UiEventManager.RegisterEvent(UiEventManager_1.UiEvent.OnQuestFinish, { self: this, callback: this.onQuestFinish, unregisterAfter: true });
                 this.started = true;
                 this.currentProgress(0);
                 this.maxProgress(this.duration());
-                new Interval_1.Interval('Quest >' + this.name + '<', function () { _this.currentProgress(_this.currentProgress() + 1); }, 1000, this.duration(), function () { return UiEventManager_1.UiEventManager.FireEvent('onQuestFinish', _this); }).start();
+                new Interval_1.Interval('Quest >' + this.name + '<', function () { _this.currentProgress(_this.currentProgress() + 1); }, 1000, this.duration(), function () { return UiEventManager_1.UiEventManager.FireEvent(UiEventManager_1.UiEvent.OnQuestFinish, _this); }).start();
             }
         };
         Quest.prototype.onQuestFinish = function (eventReturn) {
-            var self = eventReturn.this;
+            var self = eventReturn.self;
             if (self.name === eventReturn.parameter.name) {
                 var p = Global_1.Global.$Player;
                 var itemRewards = Global_1.Global.$Items.gem.getRandom(3);
-                itemRewards.forEach(function (i) {
-                    console.log('' + i.amount + 'x ' + i.item.name);
-                });
                 p.backpack.addItems(itemRewards);
                 /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula. */
                 self.started = false;

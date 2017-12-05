@@ -2,6 +2,7 @@ import * as ko from 'knockout';
 import { IStackedItem } from '../../../items/IStackedItem';
 import { Item } from '../../../items/Item';
 import { ItemStacker } from '../../../util/ItemStacker';
+import { UiEventManager, UiEvent } from '../../../core/UiEventManager';
 /**
  * Represents the Backpack of the Player.
  * 
@@ -26,6 +27,7 @@ export class Backpack {
      */
     public addItem(item: Item): void {
         this.stacker.addItem(item);
+        UiEventManager.FireEvent(UiEvent.OnItemAddedToBackpack, item);
     }
 
     /**
@@ -36,6 +38,9 @@ export class Backpack {
      */
     public addItems(items: Array<IStackedItem>): void {
         this.stacker.addItems(items);
+        items.forEach(i => {
+            UiEventManager.FireEvent(UiEvent.OnItemAddedToBackpack, i.item);
+        });
     }
 
     /**

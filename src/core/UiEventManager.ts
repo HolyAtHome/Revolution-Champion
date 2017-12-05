@@ -1,5 +1,11 @@
-import { UiEventFunction } from "../util/ui/UiEventFunction";
-import { UiEventReturn } from "../util/ui/UiEventReturn";
+import { UiEventFunction } from '../util/ui/UiEventFunction';
+import { UiEventReturn } from '../util/ui/UiEventReturn';
+
+export enum UiEvent {
+    OnQuestFinish = 'onQuestFinish',
+    OnItemAddedToBackpack = 'onItemAddedToBackpack',
+    OnPlayerLevelUp = 'onPlayerLevelUp'
+}
 
 export class UiEventManager {
 
@@ -8,11 +14,22 @@ export class UiEventManager {
     private eventSubscribers: any;
 
     constructor() {
+        UiEvent.OnQuestFinish
         this.eventSubscribers = {
-            'onQuestFinish': new Array<UiEventFunction>()
+            [UiEvent.OnQuestFinish]: new Array<UiEventFunction>(),
+            [UiEvent.OnItemAddedToBackpack]: new Array<UiEventFunction>(),
+            [UiEvent.OnPlayerLevelUp]: new Array<UiEventFunction>()
         };
     }
 
+    /**
+     * Register a Function to an Event. The Function will be called whenever the Event gets fired.
+     * 
+     * @static
+     * @param {string} event The event name (Use Enum UiEvent)
+     * @param {UiEventFunction} func The UiEventFunction that gets called.
+     * @memberof UiEventManager
+     */
     public static RegisterEvent(event: string, func: UiEventFunction): void {
         let _this = UiEventManager.checkInstance();
 
@@ -25,6 +42,14 @@ export class UiEventManager {
         }
     }
 
+    /**
+     * Fires a specific Event and calls all Functions that were Registered to that event.
+     * 
+     * @static
+     * @param {string} event The event name (Use Enum UiEvent)
+     * @param {Object} argument The Object that you want should get passed to the Registered Functions
+     * @memberof UiEventManager
+     */
     public static FireEvent(event: string, argument: Object): void {
         let _this = UiEventManager.checkInstance();
 
@@ -32,7 +57,7 @@ export class UiEventManager {
             const subs = _this.eventSubscribers[event];
             for(let i = subs.length - 1; i >= 0; i--) {
                 const eventFunction: UiEventFunction = subs[i];
-                const eventReturn: UiEventReturn = { this: eventFunction.this, parameter: argument };
+                const eventReturn: UiEventReturn = { self: eventFunction.self, parameter: argument };
                 eventFunction.callback(eventReturn);
                 if (eventFunction.unregisterAfter) {
                     subs.splice(i, 1);

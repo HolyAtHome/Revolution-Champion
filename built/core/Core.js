@@ -1,8 +1,9 @@
-define(["require", "exports", "knockout", "./Global"], function (require, exports, ko, Global_1) {
+define(["require", "exports", "knockout", "./Global", "./UiEventManager", "./NotificationManager"], function (require, exports, ko, Global_1, UiEventManager_1, NotificationManager_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Core = /** @class */ (function () {
         function Core(startNav) {
+            this.Notification = new NotificationManager_1.NotificationManager();
             this.$Adventures = Global_1.Global.$Adventures.all();
             this.$Buildings = Global_1.Global.$Buildings.all();
             this.navigation = Global_1.Global.$Navigation;
@@ -16,7 +17,15 @@ define(["require", "exports", "knockout", "./Global"], function (require, export
             console.log('Currently we have some Development Things going on. Delet these thing in core.ts later.');
             this.player.gold(1000);
             this.player.backpack.addItems(Global_1.Global.$Items.junk.getRandom(3));
+            UiEventManager_1.UiEventManager.RegisterEvent(UiEventManager_1.UiEvent.OnItemAddedToBackpack, { self: this, callback: this.logItems, unregisterAfter: false });
+            UiEventManager_1.UiEventManager.RegisterEvent(UiEventManager_1.UiEvent.OnQuestFinish, { self: this, callback: this.logQuestComplete, unregisterAfter: false });
         }
+        Core.prototype.logItems = function (ret) {
+            console.log('Core.logItems :: Item added to Backpack', ret.parameter.name);
+        };
+        Core.prototype.logQuestComplete = function (ret) {
+            console.log('Core.logQuestComplete :: Quest Completed!', ret.parameter.name);
+        };
         Core.prototype.isNavigation = function (nav, subNav) {
             if (subNav === void 0) { subNav = ''; }
             if (subNav === '') {

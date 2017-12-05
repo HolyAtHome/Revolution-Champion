@@ -6,10 +6,16 @@ import { Interval } from './../util/Interval';
 import { Player } from '../entities/player/Player';
 import { Adventure } from './../adventures/Adventure';
 import { Building } from './../buildings/Building';
-import { UiEventManager } from './UiEventManager';
+import { UiEventManager, UiEvent } from './UiEventManager';
 import { UiEventFunction } from '../util/ui/UiEventFunction';
+import { Item } from '../items/Item';
+import { UiEventReturn } from '../util/ui/UiEventReturn';
+import { NotificationManager } from './NotificationManager';
 
 class Core {
+
+    Notification: NotificationManager;
+
     $Adventures: KnockoutObservableArray<Adventure>;
     $Buildings: KnockoutObservableArray<Building>;
 
@@ -23,6 +29,8 @@ class Core {
     currentQuest: KnockoutObservable<Quest>
 
     constructor(startNav: String) {
+        this.Notification = new NotificationManager();
+
         this.$Adventures = Global.$Adventures.all();
         this.$Buildings = Global.$Buildings.all();
 
@@ -41,6 +49,16 @@ class Core {
         console.log('Currently we have some Development Things going on. Delet these thing in core.ts later.');
         this.player.gold(1000);
         this.player.backpack.addItems(Global.$Items.junk.getRandom(3));
+        UiEventManager.RegisterEvent(UiEvent.OnItemAddedToBackpack, {self: this, callback: this.logItems, unregisterAfter: false});
+        UiEventManager.RegisterEvent(UiEvent.OnQuestFinish, {self:this, callback: this.logQuestComplete, unregisterAfter: false});
+    }
+
+    logItems(ret: UiEventReturn): void {
+        console.log('Core.logItems :: Item added to Backpack', ret.parameter.name);
+    }
+
+    logQuestComplete(ret: UiEventReturn): void {
+        console.log('Core.logQuestComplete :: Quest Completed!', ret.parameter.name);
     }
 
     isNavigation(nav: String, subNav: String = '') : boolean {

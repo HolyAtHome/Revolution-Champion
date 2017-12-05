@@ -5,7 +5,7 @@ import { Apprentice } from './../entities/Apprentice';
 import { QuestRequirements } from './QuestRequirements';
 import { QuestDifficulty } from './QuestDifficulty';
 import * as ko from 'knockout';
-import { UiEventManager } from '../core/UiEventManager';
+import { UiEventManager, UiEvent } from '../core/UiEventManager';
 import { UiEventReturn } from '../util/ui/UiEventReturn';
 
 export class Quest {
@@ -74,7 +74,7 @@ export class Quest {
 
     startQuest(): void {
         if(!this.started) {
-            UiEventManager.RegisterEvent('onQuestFinish', { this: this, callback: this.onQuestFinish, unregisterAfter: true });
+            UiEventManager.RegisterEvent(UiEvent.OnQuestFinish, { self: this, callback: this.onQuestFinish, unregisterAfter: true });
             this.started = true;
             this.currentProgress(0);
             this.maxProgress(this.duration());
@@ -83,19 +83,16 @@ export class Quest {
                 () => { this.currentProgress(this.currentProgress() + 1); }, 
                 1000, 
                 this.duration(), 
-                () => UiEventManager.FireEvent('onQuestFinish', this)
+                () => UiEventManager.FireEvent(UiEvent.OnQuestFinish, this)
             ).start();
         }
     }
 
     private onQuestFinish(eventReturn: UiEventReturn): void {
-        let self: Quest = eventReturn.this;
+        let self: Quest = eventReturn.self;
         if (self.name === eventReturn.parameter.name) {
             let p = Global.$Player;
             let itemRewards = Global.$Items.gem.getRandom(3);
-            itemRewards.forEach(i => {
-                console.log('' + i.amount + 'x ' + i.item.name);
-            })
             p.backpack.addItems(itemRewards);
             /* TODO: Add Gold. Formula = (8*factor*factor) + (15*factor); Maybe include player-level in formula. */
             self.started = false;

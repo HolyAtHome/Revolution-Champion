@@ -1,4 +1,4 @@
 export interface UiEventReturn {
-    this: any;
+    self: any;
     parameter: any;
 }

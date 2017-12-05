@@ -1,4 +1,4 @@
-define(["require", "exports", "../../../util/ItemStacker"], function (require, exports, ItemStacker_1) {
+define(["require", "exports", "../../../util/ItemStacker", "../../../core/UiEventManager"], function (require, exports, ItemStacker_1, UiEventManager_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -20,6 +20,7 @@ define(["require", "exports", "../../../util/ItemStacker"], function (require, e
          */
         Backpack.prototype.addItem = function (item) {
             this.stacker.addItem(item);
+            UiEventManager_1.UiEventManager.FireEvent(UiEventManager_1.UiEvent.OnItemAddedToBackpack, item);
         };
         /**
          * Adds multiple Items to the Backpack.
@@ -29,6 +30,9 @@ define(["require", "exports", "../../../util/ItemStacker"], function (require, e
          */
         Backpack.prototype.addItems = function (items) {
             this.stacker.addItems(items);
+            items.forEach(function (i) {
+                UiEventManager_1.UiEventManager.FireEvent(UiEventManager_1.UiEvent.OnItemAddedToBackpack, i.item);
+            });
         };
         /**
          * Sells an Item from the Backpack

@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "./../../quests/QuestDifficulty", "knockout", "./../Entity", "./features/Backpack", "./../../quests/Quest", "./../../util/Interval"], function (require, exports, QuestDifficulty_1, ko, Entity_1, Backpack_1, Quest_1, Interval_1) {
+define(["require", "exports", "./../../quests/QuestDifficulty", "knockout", "./../Entity", "./features/Backpack", "./../../quests/Quest", "./../../util/Interval", "../../core/UiEventManager"], function (require, exports, QuestDifficulty_1, ko, Entity_1, Backpack_1, Quest_1, Interval_1, UiEventManager_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Player = /** @class */ (function (_super) {
@@ -120,6 +120,7 @@ define(["require", "exports", "./../../quests/QuestDifficulty", "knockout", "./.
          * @memberof Player
          */
         Player.prototype.onLevelUp = function () {
+            UiEventManager_1.UiEventManager.FireEvent(UiEventManager_1.UiEvent.OnPlayerLevelUp, this.level());
             this.stamina(this.stamina() + 1);
             this.strength(this.strength() + 1);
         };
