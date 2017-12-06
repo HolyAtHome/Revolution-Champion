@@ -54,8 +54,18 @@ button:active {
 }
 
 .icon-img {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
+}
+
+.icon-img-big {
+    width: 48px;
+    height: 48px;
+}
+
+.icon-img-full {
+    width: 64px;
+    height: 64px;
 }
 
 .loading-spinner {

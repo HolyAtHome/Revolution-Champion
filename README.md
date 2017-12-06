@@ -2,6 +2,14 @@
 
 This is a small game :)
 
+* Resources
+    * Buildings:
+        * Marketplace: https://ariathordia.deviantart.com/
+        * House 2: https://albertov.deviantart.com/
+        * Rest:  https://rgbfumes.deviantart.com
+    * Item Icons:
+        * https://opengameart.org/content/496-pixel-art-icons-for-medievalfantasy-rpg
+
 ## ToFix-List:
 * When Player sells more than present of a given Item, only sell max available.
 
@@ -11,8 +19,6 @@ This is a small game :)
     * Add Loot-Tables
 * Add Options-Panel
 * Implement Town-Panel
-    * Add as source: 
-        * https://rgbfumes.deviantart.com
         * https://ariathordia.deviantart.com/ (Marketplace)
         * https://albertov.deviantart.com/ (house_2.png)
 * Implements Market-Panel ___In Progress___

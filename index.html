@@ -23,6 +23,7 @@
     <div style="display: none;" data-bind="style: { display: 'block' }">
         <div class="navigation">
             <a data-bind="click: changeNavigation('Town')">Town</a>
+            <a data-bind="click: changeNavigation('Player')">Player</a>
             <a data-bind="click: changeNavigation('Adventure')">Adventure</a>
             <a data-bind="click: changeNavigation('Dungeons')">Dungeons</a>
             <a data-bind="click: changeNavigation('Market')">Market</a>
@@ -32,7 +33,7 @@
             <table class="player-table">
                 <tr>
                     <td colspan="3">
-                        <img class="center" src="resources/images/Warrior.png" alt="Warrior" height="96" width="96">
+                        <img class="center" src="resources/images/player.png" alt="Warrior" height="96" width="96">
                     </td>
                 </tr>
                 <tr>
@@ -46,12 +47,10 @@
                 <tr>
                     <td>Stamina</td>
                     <td data-bind="text: player.stamina" />
-                    <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.stamina, 1); }, visible: player.statPoints() > 0">+</button></td>
                 </tr>
                 <tr>
                     <td>Strength</td>
                     <td data-bind="text: player.strength" />
-                    <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.strength, 1); }, visible: player.statPoints() > 0">+</button></td>
                 </tr>
                 <tr>
                     <td>Level</td>
@@ -118,6 +117,26 @@
                 </div>
             </div>
             <!-- /ko -->
+        </div>
+
+        <div class="main-div player-div" data-bind="visible: isNavigation('Player')">
+            <div>
+                <table>
+                    <tr>
+                        <th data-bind="text: 'Unspent Stat Points: ' + player.statPoints()"></th>
+                    </tr>
+                    <tr>
+                        <td>Stamina</td>
+                        <td data-bind="text: player.stamina"></td>
+                        <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.stamina, 1); }, visible: player.statPoints() > 0">+</button></td>
+                    </tr>
+                    <tr>
+                        <td>Strength</td>
+                        <td data-bind="text: player.strength"></td>
+                        <td><button class="button-increase" data-bind="click: function() { player.increaseStat(player.strength, 1); }, visible: player.statPoints() > 0">+</button></td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div class="main-div adventure-div" data-bind="visible: isNavigation('Adventure')">
