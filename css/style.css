@@ -188,6 +188,26 @@ button:active {
     font-weight: bold;
 }
 
+.player-portrait { float: left; }
+.player-portrait * { float: left; }
+
+.player-items { width: 80px; height: auto; margin: 1px 10px; }
+.player-item {
+    border: 1px solid black;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1px;
+}
+.player-item img {
+    width: inherit;
+    opacity: 0.6;
+}
+.player-full {
+    width: 256px;
+    height: 256px;
+    margin: 2px 0;
+}
+
 .wide-nav { background-color: rgb(148, 97, 50); display: flex;}
 .wide-nav a { flex-basis: 100%; font-size: 12px; border-right: 1px solid rgb(83, 54, 28); }
 .wide-nav a:last-child { border-right: none; }
